@@ -17,7 +17,7 @@
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h4 class="m-0 fw-bold text-black">kary<span class="text-success">ana</span></h4>
 		<div class="ms-auto d-flex align-items-center">
-			<a href="#" class="me-3 text-dark fs-5"><i class="bi bi-person-circle"></i></a>
+			<a href="/login" class="me-3 text-dark fs-5"><i class="bi bi-person-circle"></i></a>
 			<a href="#" class="me-3 text-dark fs-5"><i class="bi bi-basket"></i></a>
 			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
 		</div>

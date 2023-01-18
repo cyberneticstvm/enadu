@@ -48,6 +48,16 @@ class Kernel extends HttpKernel
             'auth',
             \App\Http\Middleware\User::class
         ],
+
+        'admin' => [
+            'auth',
+            \App\Http\Middleware\Admin::class
+        ],
+
+        'staff' => [
+            'auth',
+            \App\Http\Middleware\Staff::class
+        ],
     ];
 
     /**

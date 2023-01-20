@@ -19,6 +19,16 @@
 	<link href="{{ public_path().'/vendor/sidebar/demo.css' }}" rel="stylesheet">
 </head>
 <body class="mb-5 pb-5">
+<div class="p-3 shadow-sm bg-warning danger-nav osahan-home-header sticky-top">
+	<div class="font-weight-normal mb-0 d-flex align-items-center">
+		<h4 class="m-0 fw-bold text-black">E<span class="text-success">nadu</span></h4>
+		<div class="ms-auto d-flex align-items-center">
+			<a href="/login" class="me-3 text-dark fs-5"><i class="bi bi-person-circle"></i></a>
+			<a href="/cart" class="me-3 text-dark fs-5"><i class="bi bi-basket"></i></a>
+			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
+		</div>
+	</div>
+</div>
 
 @yield('content')
 
@@ -35,80 +45,10 @@
 			</a>
 		</li>
 		<li>
-			<a href="/account"><i class="bi bi-code-square me-2"></i> Splash</a>
+			<a href="/orders"><i class="bi bi-code-square me-2"></i>My Orders</a>
 		</li>
 		<li>
-			<a href="/account"><i class="bi bi-file-break me-2"></i> Landing</a>
-		</li>
-		<li>
-			<a href="/account"><i class="bi bi-ui-checks-grid me-2"></i> Get Started</a>
-		</li>
-		<li>
-			<a href="#"><i class="bi bi-lock me-2"></i> Authentication</a>
-			<ul>
-				<li><a href="../../preview/karyana/signin.html">Sign In</a></li>
-				<li><a href="../../preview/karyana/signup.html">Sign Up</a></li>
-				<li><a href="../../preview/karyana/change-password.html">Change Password</a></li>
-				<li><a href="../../preview/karyana/verification.html">Verification</a></li>
-			</ul>
-		</li>
-		<li><a href="../../preview/karyana/home.html"><i class="bi bi-house me-2"></i> Homepage</a></li>
-		<li><a href="../../preview/karyana/gift-card.html"><i class="bi bi-award me-2"></i> Offers</a></li>
-		<li><a href="../../preview/karyana/listing.html"><i class="bi bi-list-task me-2"></i> Listing</a></li>
-		<li><a href="../../preview/karyana/bag.html"><i class="bi bi-bag me-2"></i> Bag</a></li>
-		<li>
-			<a href="#"><i class="bi bi-person me-2"></i> Profile Pages</a>
-			<ul>
-				<li><a href="../../preview/karyana/my-order.html"> My Order</a></li>
-				<li><a href="../../preview/karyana/order-confirm.html"> Order Confirm</a></li>
-				<li><a href="../../preview/karyana/order-detail.html"> Order Detail</a></li>
-				<li><a href="../../preview/karyana/add-address.html"> Add Address</a></li>
-			</ul>
-		</li>
-		<li>
-			<a href="#"><i class="bi bi-clipboard me-2"></i> Extra Pages</a>
-			<ul>
-				<li><a href="../../preview/karyana/support.html">Support</a></li>
-				<li><a href="../../preview/karyana/notification.html">Notification</a></li>
-				<li><a href="../../preview/karyana/empty.html"> Empty Cart</a></li>
-			</ul>
-		</li>
-		<li>
-			<a href="#"><i class="bi bi-link-45deg me-2"></i> Navigation Link Example</a>
-			<ul>
-				<li>
-					<a href="#">Link Example 1</a>
-					<ul>
-						<li>
-							<a href="#">Link Example 1.1</a>
-							<ul>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">Link Example 1.2</a>
-							<ul>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><a href="#">Link Example 2</a></li>
-				<li><a href="#">Link Example 3</a></li>
-				<li><a href="#">Link Example 4</a></li>
-				<li data-nav-custom-content>
-					<div class="custom-message">
-						You can add any custom content to your navigation items. This text is just an example.
-					</div>
-				</li>
-			</ul>
+			<a href="/account"><i class="bi bi-file-break me-2"></i>My Addresses</a>
 		</li>
 		@if(Auth::user())
 		<li>
@@ -118,54 +58,89 @@
 	</ul>
 	<ul class="bottom-nav">
 		<li class="email">
-			<a class="text-success nav-item text-center" href="../../preview/karyana/home.html" tabindex="0" role="menuitem">
+			<a class="text-success nav-item text-center" href="/" tabindex="0" role="menuitem">
 				<p class="h5 m-0"><i class="icofont-ui-home text-success"></i></p>
 				Home
 			</a>
 		</li>
 		<li class="github">
-			<a href="../../preview/karyana/gift-card.html" class="nav-item text-center" tabindex="0" role="menuitem">
+			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
 				<p class="h5 m-0"><i class="icofont-sale-discount"></i></p>
 				Offer
 			</a>
 		</li>
 		<li class="ko-fi">
-			<a href="../../preview/karyana/support.html" class="nav-item text-center" tabindex="0" role="menuitem">
+			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
 				<p class="h5 m-0"><i class="icofont-support-faq"></i></p>
 				Help
 			</a>
 		</li>
 	</ul>
 </nav>
-<div class="modal fade" id="exampleModala" tabindex="-1" aria-labelledby="exampleModalLabela" aria-hidden="true">
+<div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered m-0">
 		<div class="modal-content modal-content rounded-0 border-0 vh-100">
 			<div class="modal-header">
-				<h6 class="modal-title fw-bold" id="exampleModalLabela">Select Quantity</h6>
+				<h6 class="modal-title fw-bold" id="addressModalLabel">Add New Address</h6>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<div class="btn-group osahan-btn-group w-100 d-flex flex-column" role="group" aria-label="Basic radio toggle button group">
-					<input type="radio" class="btn-check" name="btnradioq" id="btnradio1q" autocomplete="off" checked="">
-					<label class="btn btn-outline-light d-flex align-items-center gap-3 rounded px-3 py-2" for="btnradio1q">
-						<h6 class="mb-0 fw-bold">Small</h6>
-						<span class="ms-auto fw-bold fs-6">Rs.85 <i class="bi bi-check-circle-fill ms-3"></i></span>
-					</label>
-					<input type="radio" class="btn-check" name="btnradioq" id="btnradio2q" autocomplete="off">
-					<label class="btn btn-outline-light d-flex align-items-center gap-3 rounded mt-2 px-3 py-2" for="btnradio2q">
-						<h6 class="mb-0 fw-bold">Medium</h6>
-						<span class="ms-auto fw-bold fs-6">Rs.99 <i class="bi bi-check-circle-fill ms-3"></i></span>
-					</label>
-					<input type="radio" class="btn-check" name="btnradioq" id="btnradio2qq" autocomplete="off">
-					<label class="btn btn-outline-light d-flex align-items-center gap-3 rounded mt-2 px-3 py-2" for="btnradio2qq">
-						<h6 class="mb-0 fw-bold">Large</h6>
-						<span class="ms-auto fw-bold fs-6">Rs.109 <i class="bi bi-check-circle-fill ms-3"></i></span>
-					</label>
-				</div>
-			</div>
-			<div class="modal-footer d-flex align-items-center justify-content-between fixed-bottom">
-				<button type="button" class="col btn btn-outline-success" data-bs-dismiss="modal">Add to Bag</button>
-				<button type="button" class="col btn btn-success" data-bs-dismiss="modal">Buy Now</button>
+				<form method="post" action="{{ route('address.save') }}">
+					@csrf
+					<div class="mb-4">
+						<label class="form-label text-muted small mb-1">Name</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-person text-muted"></i></span>
+							<input type="text" class="form-control" name="contact_name" placeholder="Enter Name" required>
+						</div>
+					</div>
+					<div class="mb-4">
+						<label class="form-label text-muted small mb-1">Mobile</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-phone text-muted"></i></span>
+							<input type="text" class="form-control" name="mobile" maxlength="10" placeholder="Enter Mobile" required>
+						</div>
+					</div>
+					<div class="mb-4">
+						<label class="form-label text-muted small mb-1">Address</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
+							<input type="text" class="form-control" name="address" placeholder="Enter address" required>
+						</div>
+						<input type="hidden" name="latitude" id="latitude" value="" />
+						<input type="hidden" name="longitude" id="longitude" value="" />
+					</div>
+					<div class="mb-4">
+						<label class="form-label text-muted small mb-1">District</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-bank text-muted"></i></span>
+							<select class="form-control" name="district" required>
+								<option value="">Select</option>
+								@forelse($districts as $key => $district)
+								<option value="{{ $district->id }}">{{ $district->name }}</option>
+								@empty
+								@endforelse
+							</select>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label text-muted small mb-1">Landmark</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-geo text-muted"></i></span>
+							<input type="text" class="form-control" name="landmark" placeholder="Landmark" required>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label text-muted small mb-1">Pincode</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-geo text-muted"></i></span>
+							<input type="text" class="form-control" name="pincode" placeholder="Enter Pincode" required>
+						</div>
+					</div>
+					<div class="input-group p-3">   
+						<button type="submit" class="col btn btn-submit btn-success">Save</a>    
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

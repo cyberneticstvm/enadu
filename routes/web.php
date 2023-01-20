@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -18,7 +21,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [AuthController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::post('/cart', [CartController::class, 'addtocart'])->name('cart.add');
+Route::get('/cart/update', [CartController::class, 'updatecart'])->name('cart.update');
+Route::get('/cart/delete', [CartController::class, 'deletecart'])->name('cart.delete');
 
 Route::get('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
@@ -27,6 +34,10 @@ Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
 
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/account', [AuthController::class, 'account'])->name('account');
+    Route::get('/address', [AddressController::class, 'index'])->name('address');
+    Route::post('/address', [AddressController::class, 'store'])->name('address.save');
+    Route::get('/orders', [UserController::class, 'order'])->name('order');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){

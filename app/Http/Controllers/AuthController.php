@@ -13,23 +13,6 @@ use DB;
 
 class AuthController extends Controller
 {
-    public function home(){
-        if(Auth::user()):
-            //return redirect()->route('account');
-            if(Auth::user()->user_type == 'user'):
-                return view('home');
-            endif;
-            if(Auth::user()->user_type == 'admin'):
-                return view('admin.dash');
-            endif;
-            if(Auth::user()->user_type == 'staff'):
-                return view('staff.dash');
-            endif;
-        else:
-            return view('index');
-        endif;
-    }
-
     public function register(){
         if(Auth::user()):
             return redirect()->route('account');

@@ -34,7 +34,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="req">Product Name</label>
-                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Category Name">
+                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Product Name">
                                         </div>
                                         @error('name')
                                         <small class="text-danger">{{ $errors->first('name') }}</small>

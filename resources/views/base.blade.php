@@ -105,7 +105,7 @@
 						<label class="form-label text-muted small mb-1">Address</label>
 						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
 							<span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
-							<input type="text" class="form-control" name="address" placeholder="Enter address" required>
+							<input type="text" class="form-control" name="address" id="address" placeholder="Enter address" required>
 						</div>
 						<input type="hidden" name="latitude" id="latitude" value="" />
 						<input type="hidden" name="longitude" id="longitude" value="" />
@@ -155,7 +155,23 @@
 
 	<script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_api_key')}}&libraries=places">
 		</script>
-		
+
 	<script type="2b1840b241899e59fb500706-text/javascript" src="{{ public_path().'/js/script.js' }}"></script>
+
+	<script>
+		var options = {
+		componentRestrictions: {country: "in"}
+		};
+		window.addEventListener('load', initialize);
+		function initialize() {
+			var input = document.getElementById('address');
+			var autocomplete = new google.maps.places.Autocomplete(input, options);
+			autocomplete.addListener('place_changed', function () {
+				var place = autocomplete.getPlace();
+				$('#latitude').val(place.geometry['location'].lat());
+				$('#longitude').val(place.geometry['location'].lng());
+			});
+		}
+	</script>
 </body>
 </html>

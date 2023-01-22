@@ -20,8 +20,8 @@
 		<p class="small text-muted m-0">{{ $order->order_details()->count() }} item(s)</p>
 	</div>
 	<div class="ms-auto text-end">
-		<div class="text-success mb-2"><i class="bi bi-clock-history me-1"></i> Pending</div>
-		<div class="text-muted small">{{ $order->created_at }}</div>
+		<div class="text-success mb-2"><i class="bi bi-clock-history me-1"></i> {{ $order->payment_status }}</div>
+		<div class="text-muted small">{{ date('d/M/Y h:i a', strtotime($order->created_at)) }}</div>
 	</div>
 	<a class="stretched-link" href="order-detail.html"></a>
 </div>

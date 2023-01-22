@@ -61,7 +61,7 @@ class CartController extends Controller
             'address' => 'required',
         ]);
         //echo session()->getId();
-        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
+        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.payment_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);     
         curl_setopt($ch, CURLOPT_HEADER, FALSE);

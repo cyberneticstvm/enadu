@@ -115,13 +115,13 @@ class CartController extends Controller
         else:
             $input['payment_id'] = NULL;
             $input['payment_request_id'] = NULL;
-            $input['payment_status'] = 'pending';
+            $input['payment_status'] = 'Pending';
             $input['payment_type'] = 'cod';                        
         endif;        
         $input['discount'] = 0;
         $input['amount'] = $total;
         try{
-            DB::transaction(function() use ($input, $cart) {
+            $order = DB::transaction(function() use ($input, $cart) {
                 $order = Order::create($input);
                 foreach($cart as $id => $product):
                     $data[] = [
@@ -135,9 +135,10 @@ class CartController extends Controller
                     ];
                 endforeach;
                 $order_details = DB::table('order_details')->insert($data);
+                return $order;
             });            
             session()->forget('cart');
-            return view('thankyou')->with('success', 'Thank You! Your order has been placed successfully.');
+            return view('thankyou', compact('order'));
         }catch(Exception $e){
             throw $e;
         }

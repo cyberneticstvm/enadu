@@ -12,14 +12,9 @@
 	</div>
 </div>
 <div class="p-4">
-    @if(session()->has('success'))
+    @if($order->payment_status == 'Credit' || ($order->payment_status == 'Pending' && $order->payment_type == 'cod'))
         <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-    @endif
-    @if(session()->has('error'))
-        <div class="alert alert-danger">
-            {{ session()->get('error') }}
+            Thank You! Your order has been placed successfully with Order ID: {{ $order->id }}
         </div>
     @endif
 </div>
@@ -29,25 +24,25 @@
 <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">
 		<div class="col-3 p-0 text-center">
-			<a class="p-2 d-inline-block text-warning w-100" href="/">
+			<a class="p-2 d-inline-block {{ (request()->segment(1) == '') ? 'text-warning' : 'text-white' }} w-100" href="/">
 				<span><i class="bi bi-house h4"></i></span>
 				<p class="m-0 small">HOME</p>
 			</a>
 		</div>
 		<div class="col-3 p-0 text-center">
-			<a class="p-2 d-inline-block text-white w-100" href="/cart">
+			<a class="p-2 d-inline-block {{ (request()->segment(1) == 'cart') ? 'text-warning' : 'text-white' }} w-100" href="/cart">
 				<span><i class="bi bi-basket h4"></i></span>
 				<p class="m-0 small">BAG</p>
 			</a>
 		</div>
 		<div class="col-3 p-0 text-center">
-			<a class="p-2 d-inline-block text-white w-100" href="/">
+			<a class="p-2 d-inline-block {{ (request()->segment(1) == 'orders') ? 'text-warning' : 'text-white' }} w-100" href="/orders">
 				<span><i class="bi bi-gift h4"></i></span>
-				<p class="m-0 small">OFFERS</p>
+				<p class="m-0 small">MY ORDERS</p>
 			</a>
 		</div>
 		<div class="col-3 p-0 text-center">
-			<a class="p-2 d-inline-block text-white w-100" href="/account">
+			<a class="p-2 d-inline-block {{ (request()->segment(1) == 'account') ? 'text-warning' : 'text-white' }} w-100" href="/account">
 				<span><i class="bi bi-person h4"></i></span>
 				<p class="m-0 small">ACCOUNT</p>
 			</a>

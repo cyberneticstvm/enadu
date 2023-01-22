@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Order;
 use Hash;
@@ -113,7 +114,7 @@ class UserController extends Controller
     }
 
     public function order(){
-        $orders = Order::where('user', Auth::user()->id)->get();
+        $orders = Order::where('user', Auth::user()->id)->orderByDesc('created_at')->get();
         return view('orders', compact('orders'));
     }
 }

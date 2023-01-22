@@ -61,7 +61,7 @@ class CartController extends Controller
             'address' => 'required',
         ]);
         //echo session()->getId();
-        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.payment_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
+        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.test_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);     
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -77,7 +77,7 @@ class CartController extends Controller
             'send_email' => false,
             'webhook' => '',
             'send_sms' => false,
-            'email' => env('MAIL_FROM_ADDRESS'),
+            'email' => '',
             'allow_repeated_payments' => false
         );
         curl_setopt($ch, CURLOPT_POST, true);
@@ -90,7 +90,7 @@ class CartController extends Controller
             $paymentURL = $decode->payment_request->longurl;
             redirect()->to($paymentURL)->send();
         else:
-            return redirect()->back()->with('error', 'Something went wrong! Please try again later.');
+            return redirect()->back()->with('error', 'Something went wrong! Status Message: '.$decode->message);
         endif;   
     }
 

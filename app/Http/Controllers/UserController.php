@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 use Hash;
 use Session;
 
@@ -112,6 +113,7 @@ class UserController extends Controller
     }
 
     public function order(){
-        return view('orders');
+        $orders = Order::where('user', Auth::user()->id)->get();
+        return view('orders', compact('orders'));
     }
 }

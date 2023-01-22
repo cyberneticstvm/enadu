@@ -65,7 +65,7 @@ class CartController extends Controller
         ]);
         //echo session()->getId();
         if($request->ptype == 'cod'):
-            return redirect()->route('thankyou')->with('success', 'Thank You! Your order has been placed successfully.');
+            return redirect()->route('thankyou');
         else:
             $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.test_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
             $ch = curl_init();
@@ -137,7 +137,7 @@ class CartController extends Controller
                 $order_details = DB::table('order_details')->insert($data);
             });            
             session()->forget('cart');
-            return view('thankyou');
+            return view('thankyou')->with('success', 'Thank You! Your order has been placed successfully.');
         }catch(Exception $e){
             throw $e;
         }

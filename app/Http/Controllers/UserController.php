@@ -110,4 +110,8 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('admin.staff')->with('success','User deleted successfully');
     }
+
+    public function order(){
+        return view('orders');
+    }
 }

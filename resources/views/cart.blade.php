@@ -81,7 +81,6 @@
 <form method="post" action="{{ route('checkout') }}">
     <input type="hidden" name='purpose' value='Enadu Order' />
     <input type="hidden" name='amount' value="{{ $total }}" />
-    <input type="hidden" name='phone' value="{{ Auth::user()->mobile }}" />
     <input type="hidden" name='buyer_name' value="{{ Auth::user()->name }}" />
     @csrf
     <div class="p-3">
@@ -109,6 +108,14 @@
         @enderror
         <div class="text-end mt-3">
             <a href="/" data-bs-toggle="modal" data-bs-target="#addressModal" class="col btn btn-info">Add Address</a>
+        </div>
+        <div class="input-group p-3">
+            <div class="col">
+                <input type="radio" name="ptype" value="instamojo" checked /> Pay Now
+            </div>   
+            <div class="col">
+                <input type="radio" name="ptype" value="cod" /> Cash On Delivery
+            </div>
         </div>
     </div>
     <div class="input-group p-3">   

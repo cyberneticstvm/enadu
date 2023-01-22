@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\Order;
 use App\Models\Address;
+use DB;
 
 class CartController extends Controller
 {
@@ -61,41 +64,83 @@ class CartController extends Controller
             'address' => 'required',
         ]);
         //echo session()->getId();
-        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.test_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);     
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
-        $payload = Array(
-            'purpose' => $request->purpose,
-            'amount' => $request->amount,
-            'phone' => $request->phone,
-            'buyer_name' => $request->buyer_name,
-            'redirect_url' => $redirect_url,
-            'send_email' => false,
-            'webhook' => '',
-            'send_sms' => false,
-            'email' => '',
-            'allow_repeated_payments' => false
-        );
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $decode = json_decode($response);
-        $success = $decode->success;
-        if($success == true):
-            $paymentURL = $decode->payment_request->longurl;
-            redirect()->to($paymentURL)->send();
+        if($request->ptype == 'cod'):
+            return redirect()->route('thankyou')->with('success', 'Thank You! Your order has been placed successfully.');
         else:
-            return redirect()->back()->with('error', 'Something went wrong! Status Message: '.$decode->message);
+            $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.test_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);     
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
+            $payload = Array(
+                'purpose' => $request->purpose,
+                'amount' => $request->amount,
+                'phone' => Auth::user()->addresses()->find($request->address)->mobile,
+                'buyer_name' => $request->buyer_name,
+                'redirect_url' => $redirect_url,
+                'send_email' => false,
+                'webhook' => '',
+                'send_sms' => true,
+                'email' => '',
+                'allow_repeated_payments' => false
+            );
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $decode = json_decode($response);
+            $success = $decode->success;
+            if($success == true):
+                $paymentURL = $decode->payment_request->longurl;
+                redirect()->to($paymentURL)->send();
+            else:
+                return redirect()->back()->with('error', 'Something went wrong! Status Message: '.$decode->message);
+            endif;
         endif;   
     }
 
-    public function thankyou(){
-        session()->forget('cart');
-        return redirect()->route('thankyou')->with('success', 'Your order has been placed successfully!');
+    public function thankyou(Request $request){
+        $cart = session()->get('cart'); $total = 0;
+        foreach(session('cart') as $id => $product):
+            $total += $product['price'] * $product['qty'];
+        endforeach;
+        $input['user'] = Auth::user()->id;        
+        if(isset($request->payment_id)):
+            $input['payment_id'] = $request->payment_id;
+            $input['payment_request_id'] = $request->payment_request_id;
+            $input['payment_status'] = $request->payment_status;
+            $input['payment_type'] = 'instamojo';
+        else:
+            $input['payment_id'] = NULL;
+            $input['payment_request_id'] = NULL;
+            $input['payment_status'] = 'pending';
+            $input['payment_type'] = 'cod';                        
+        endif;        
+        $input['discount'] = 0;
+        $input['amount'] = $total;
+        try{
+            DB::transaction(function() use ($input, $cart) {
+                $order = Order::create($input);
+                foreach($cart as $id => $product):
+                    $data[] = [
+                        'order_id' => $order->id,
+                        'product' => $id,
+                        'qty' => $product['qty'],
+                        'price' => $product['price'],
+                        'total' => $product['qty']*$product['price'],
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ];
+                endforeach;
+                $order_details = DB::table('order_details')->insert($data);
+            });            
+            session()->forget('cart');
+            return view('thankyou');
+        }catch(Exception $e){
+            throw $e;
+        }
+        
     }
 }

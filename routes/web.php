@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::post('/address', [AddressController::class, 'store'])->name('address.save');
     Route::get('/orders', [UserController::class, 'order'])->name('order');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){

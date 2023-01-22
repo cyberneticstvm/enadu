@@ -49,7 +49,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products,name',
             'category_id' => 'required',
             'price' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg|max:5120',
+            'image' => 'required|mimes:png,jpg,jpeg,webp|max:5120',
             'status' => 'required',
         ]);
         $input = $request->all();

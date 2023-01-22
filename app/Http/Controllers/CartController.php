@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -60,7 +61,41 @@ class CartController extends Controller
             'address' => 'required',
         ]);
         //echo session()->getId();
-        echo session()->forget('cart');
-        return redirect()->back()->with('success', 'Your order has been placed successfully!');
+        $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);     
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
+        $payload = Array(
+            'purpose' => $request->purpose,
+            'amount' => $request->amount,
+            'phone' => $request->phone,
+            'buyer_name' => $request->buyer_name,
+            'redirect_url' => $redirect_url,
+            'send_email' => false,
+            'webhook' => '',
+            'send_sms' => false,
+            'email' => env('MAIL_FROM_ADDRESS'),
+            'allow_repeated_payments' => false
+        );
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $decode = json_decode($response);
+        $success = $decode->success;
+        if($success == true):
+            $paymentURL = $decode->payment_request->longurl;
+            redirect()->to($paymentURL)->send();
+        else:
+            return redirect()->back()->with('error', 'Something went wrong! Please try again later.');
+        endif;   
+    }
+
+    public function thankyou(){
+        session()->forget('cart');
+        return redirect()->route('thankyou')->with('success', 'Your order has been placed successfully!');
     }
 }

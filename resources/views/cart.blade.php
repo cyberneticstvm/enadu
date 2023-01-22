@@ -79,6 +79,10 @@
 </div>
 @if(Auth::user() && Auth::user()->user_type == 'user')
 <form method="post" action="{{ route('checkout') }}">
+    <input type="hidden" name='purpose' value='Enadu Order' />
+    <input type="hidden" name='amount' value="{{ $total }}" />
+    <input type="hidden" name='phone' value="{{ Auth::user()->mobile }}" />
+    <input type="hidden" name='buyer_name' value="{{ Auth::user()->name }}" />
     @csrf
     <div class="p-3">
         <h6 class="mb-3 text-black fw-bold">Select Delivery Address</h6>
@@ -108,7 +112,7 @@
         </div>
     </div>
     <div class="input-group p-3">   
-        <button type="submit" class="col btn btn-submit btn-success">CHECKOUT</a>    
+        <button type="submit" class="col btn btn-submit btn-success">CHECKOUT</button>    
     </div>
 </form>
 @else

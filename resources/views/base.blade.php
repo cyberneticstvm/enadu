@@ -19,7 +19,7 @@
 	<link href="{{ public_path().'/vendor/sidebar/demo.css' }}" rel="stylesheet">
 </head>
 <body class="mb-5 pb-5">
-<div class="p-3 shadow-sm bg-warning danger-nav osahan-home-header sticky-top">
+<!--<div class="p-3 shadow-sm bg-warning danger-nav osahan-home-header sticky-top">
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h4 class="m-0 fw-bold text-black">E<span class="text-success">nadu</span></h4>
 		<div class="ms-auto d-flex align-items-center">
@@ -28,7 +28,7 @@
 			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
 		</div>
 	</div>
-</div>
+</div>-->
 
 @yield('content')
 

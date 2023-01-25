@@ -11,9 +11,65 @@
 		</div>
 	</div>
 </div>
-<div class="p-3">
-    <form>
-        
+<div class="p-4">
+	<h5>Feedback History</h5>
+	<div class="osahan-notification">
+		<div class="row mb-3">
+			@forelse($feedbacks as $key => $feedback)
+			<div class="notification d-flex m-0 bg-white shadow-sm mb-1 p-3">
+				<div class="icon pe-3">
+					<span class="icofont-check-circled text-success mb-0 rounded-pill mt-1 fs-1 d-inline-block"></span>
+				</div>
+				<div class="noti-details l-hght-18 pr-0">
+					<p class="mb-1 fw-bold">{{ $feedback->comment }}</p>
+					<span class="small text-muted">{{ $feedback->feedback_category }}</span>
+				</div>
+				<div class="small px-0 ms-auto">
+					<span>{{ date('d/M/Y h:i a', strtotime($feedback->created_at)) }}</span>
+				</div>
+			</div>
+			@empty
+			<div class="col">No History Found!</div>
+			@endforelse
+		</div>
+	</div>
+	@if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+    <form method="post" action="{{ route('feedback.save') }}">
+        @csrf
+        <div class="mb-4">
+			<label class="form-label text-muted small mb-1 req">Feedback Category</label>
+			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+				<select class="form-control" name="feedback_category">
+					<option value="">Select</option>
+					<option value="suggestion">Suggestion</option>
+					<option value="grievance">Grievance</option>
+				</select>
+			</div>
+			@error('feedback_category')
+			<small class="text-danger">{{ $errors->first('feedback_category') }}</small>
+			@enderror
+		</div>
+        <div class="mb-4">
+			<label class="form-label text-muted small mb-1 req">Comment </label>
+			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+				<textarea class="form-control" rows="5" name="comment" placeholder="Comment">{{ old('comment') }}</textarea>
+			</div>
+			@error('comment')
+			<small class="text-danger">{{ $errors->first('comment') }}</small>
+			@enderror
+		</div>
+		<div class="input-group">   
+			<button type="submit" class="col btn btn-submit btn-success">SUBMIT</button>    
+		</div>
     </form>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">

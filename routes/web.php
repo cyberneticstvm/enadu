@@ -42,11 +42,14 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
     Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
+    Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/dash', [AdminController::class, 'dash'])->name('admin.dash');
     Route::get('/admin/order', [AdminController::class, 'order'])->name('admin.order');
+    Route::get('/admin/order-details/{id}', [AdminController::class, 'orderdetails'])->name('admin.orderdetails');
+    Route::post('/admin/order/assign', [AdminController::class, 'assignorder'])->name('admin.order.assign');
 
     Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
     Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
@@ -70,6 +73,7 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::delete('/admin/staff/delete/{id}', [UserController::class, 'destroy'])->name('admin.staff.delete');
 
     Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
+    Route::post('/admin/feedback', [AdminController::class, 'savefeedback'])->name('admin.feedback.save');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){

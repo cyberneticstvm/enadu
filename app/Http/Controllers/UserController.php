@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Feedback;
 use Hash;
 use Session;
 
@@ -119,6 +120,19 @@ class UserController extends Controller
     }
 
     public function feedback(){
-        return view('feedback');
+        $feedbacks = Feedback::where('user_id', Auth::user()->id)->get();
+        return view('feedback', compact('feedbacks'));
+    }
+    
+    public function savefeedback(Request $request){
+        $this->validate($request, [
+            'feedback_category' => 'required',
+            'comment' => 'required',
+        ]);
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+        $input['comment_id'] = 0;
+        Feedback::create($input);
+        return redirect()->route('feedback')->with('success','Feedback submitted successfully');
     }
 }

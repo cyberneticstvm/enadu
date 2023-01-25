@@ -106,7 +106,7 @@
               </li>
               <li class="nav-item">
                 <a href="/admin/feedback" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
+                  <i class="far fa-comment nav-icon"></i>
                   <p>Feedback Management</p>
                 </a>
               </li>               

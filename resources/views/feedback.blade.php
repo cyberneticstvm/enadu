@@ -4,7 +4,7 @@
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h6 class="fw-normal mb-0 text-dark d-flex align-items-center">
 			<a class="text-dark me-3 fs-4" href="/"><i class="bi bi-chevron-left"></i></a>
-			My Account
+			My Feedbacks
 		</h6>
 		<div class="ms-auto d-flex align-items-center">
 			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
@@ -12,26 +12,9 @@
 	</div>
 </div>
 <div class="p-3">
-	<div class="row">
-		<div class="col text-center p-3">
-			<a href="/"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">PRODUCTS</span>
-		</div>
-		<div class="col text-center p-3">
-			<a href="/orders"><img src="{{ public_path().'/img/truck.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">ORDERS</span>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col text-center p-3">
-			<a href="/feedback"><img src="{{ public_path().'/img/feedback.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">FEEDBACK</span>
-		</div>
-		<div class="col text-center p-3">
-			<a href="/account"><img src="{{ public_path().'/img/user.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">ACCOUNT</span>
-		</div>
-	</div>
+    <form>
+        
+    </form>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

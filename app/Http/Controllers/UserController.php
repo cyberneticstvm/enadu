@@ -117,4 +117,8 @@ class UserController extends Controller
         $orders = Order::where('user', Auth::user()->id)->orderByDesc('created_at')->get();
         return view('orders', compact('orders'));
     }
+
+    public function feedback(){
+        return view('feedback');
+    }
 }

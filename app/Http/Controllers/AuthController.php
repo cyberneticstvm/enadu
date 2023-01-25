@@ -45,6 +45,14 @@ class AuthController extends Controller
         endif;
     }
 
+    public function adminlogin(){
+        if(Auth::user()):
+            return redirect()->route('admin.dash');
+        else:
+            return view('admin.login');
+        endif;
+    }
+
     public function loginn(Request $request){
         $this->validate($request, [
             'mobile' => 'required',

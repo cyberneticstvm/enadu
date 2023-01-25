@@ -32,6 +32,8 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
 
+Route::get('/admin/login', [AuthController::class, 'adminlogin'])->name('adminlogin');
+
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/account', [AuthController::class, 'account'])->name('account');
     Route::get('/address', [AddressController::class, 'index'])->name('address');
@@ -39,6 +41,7 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/orders', [UserController::class, 'order'])->name('order');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
+    Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
@@ -65,6 +68,8 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/staff/edit/{id}', [UserController::class, 'edit'])->name('admin.staff.edit');
     Route::put('/admin/staff/edit/{id}', [UserController::class, 'update'])->name('admin.staff.update');
     Route::delete('/admin/staff/delete/{id}', [UserController::class, 'destroy'])->name('admin.staff.delete');
+
+    Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){

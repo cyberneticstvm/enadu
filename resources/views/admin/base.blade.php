@@ -86,7 +86,7 @@
                   <p>Orders</p>
                 </a>
               </li>
-			  <li class="nav-item">
+			        <li class="nav-item">
                 <a href="/admin/category" class="nav-link">
                   <i class="fa fa-list nav-icon"></i>
                   <p>Category Management</p>
@@ -103,7 +103,13 @@
                   <i class="far fa-user nav-icon"></i>
                   <p>Staff Management</p>
                 </a>
-              </li>              
+              </li>
+              <li class="nav-item">
+                <a href="/admin/feedback" class="nav-link">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>Feedback Management</p>
+                </a>
+              </li>               
             </ul>
           </li>
         </ul>

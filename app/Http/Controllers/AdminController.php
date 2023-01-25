@@ -17,4 +17,8 @@ class AdminController extends Controller
     public function order(){
         return view('admin.order');
     }
+
+    public function feedback(){
+        return view('admin.feedback');
+    }
 }

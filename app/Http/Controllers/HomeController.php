@@ -9,7 +9,7 @@ use DB;
 
 class HomeController extends Controller
 {
-    public function home(){
+    public function geebinapp(){
         $products = Product::where('status', 1)->get();
         if(Auth::user()):
             //return redirect()->route('account');

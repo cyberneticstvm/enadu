@@ -14,7 +14,7 @@
 <div class="p-3">
 	<div class="row">
 		<div class="col text-center p-3">
-			<a href="/"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
+			<a href="/home"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
 			<span class="text-success fw-bold">PRODUCTS</span>
 		</div>
 		<div class="col text-center p-3">
@@ -28,7 +28,7 @@
 			<span class="text-success fw-bold">FEEDBACK</span>
 		</div>
 		<div class="col text-center p-3">
-			<a href="/account"><img src="{{ public_path().'/img/user.png' }}" class="img-fluid" /></a><br>
+			<a href="/profile"><img src="{{ public_path().'/img/user.png' }}" class="img-fluid" /></a><br>
 			<span class="text-success fw-bold">ACCOUNT</span>
 		</div>
 	</div>

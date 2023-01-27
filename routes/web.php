@@ -21,7 +21,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/app', [HomeController::class, 'home'])->name('home');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart', [CartController::class, 'addtocart'])->name('cart.add');
 Route::get('/cart/update', [CartController::class, 'updatecart'])->name('cart.update');
@@ -32,7 +32,7 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
 
-Route::get('/admin/login', [AuthController::class, 'adminlogin'])->name('adminlogin');
+Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/account', [AuthController::class, 'account'])->name('account');

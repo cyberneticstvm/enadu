@@ -21,7 +21,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/app', [HomeController::class, 'home'])->name('home');
+Route::get('/geebinapp', [HomeController::class, 'home'])->name('home');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart', [CartController::class, 'addtocart'])->name('cart.add');
 Route::get('/cart/update', [CartController::class, 'updatecart'])->name('cart.update');
@@ -35,6 +35,7 @@ Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
 Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/account', [AuthController::class, 'account'])->name('account');
     Route::get('/address', [AddressController::class, 'index'])->name('address');
     Route::post('/address', [AddressController::class, 'store'])->name('address.save');

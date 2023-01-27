@@ -10,8 +10,6 @@ use DB;
 class HomeController extends Controller
 {
     public function home(){
-        echo 'hai';
-        die;
         $products = Product::where('status', 1)->get();
         if(Auth::user()):
             //return redirect()->route('account');

@@ -18,6 +18,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function profile(){
+        return view('profile');
+    }
+
     public function index()
     {
         $users = User::where('user_type', 'staff')->get();

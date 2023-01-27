@@ -15,7 +15,8 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return view('address');
+        $addresses = Address::where('user', Auth::user()->id)->get();
+        return view('address', compact('addresses'));
     }
 
     /**
@@ -40,14 +41,18 @@ class AddressController extends Controller
             'contact_name' => 'required',
             'mobile' => 'required|numeric|digits:10',
             'address' => 'required',
-            'pincode' => 'required',
+            'pincode' => 'required|numeric',
             'landmark' => 'required',
             'district' => 'required',
         ]);
         $input = $request->all();
         $input['user'] = Auth::user()->id;
         $address = Address::create($input);
-        return redirect()->route('cart')->with('success','Address added successfully');
+        if($request->type == 'cart'):
+            return redirect()->route('cart')->with('success','Address added successfully');
+        else:
+            return redirect()->route('address')->with('success','Address added successfully');
+        endif;
     }
 
     /**
@@ -92,6 +97,7 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Address::find($id)->delete();
+        return redirect()->route('address')->with('success','Address deleted successfully');
     }
 }

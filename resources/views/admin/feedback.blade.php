@@ -47,11 +47,25 @@
                 </a>
                 <div id="feed_{{ $feed->user_id }}" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        @php $comments = App\Models\Feedback::where('user_id', $feed->user_id)->get(); @endphp
+                        @php 
+                          $comments = App\Models\Feedback::where('user_id', $feed->user_id)->where('comment_id', 0)->get();
+                        @endphp
                         @forelse($comments as $c => $com)
+                        @php
+                          $replies = App\Models\Feedback::where('comment_id', $com->id)->get();
+                        @endphp
                         <div class="card-title w-100 border-bottom">
-                            {{ $com->comment }}<br>
-                            <div class="text-right"><small>Commented On: {{ date('d/M/Y h:i a', strtotime($com->created_at)) }}</small></div>
+                            {{ $com->comment }}<br>                            
+                            <div class="text-right">
+                              <small>Commented On: {{ date('d/M/Y h:i a', strtotime($com->created_at)) }}<br>
+                              <a href="/admin/comment/reply/{{$com->id}}">Reply</a></small>
+                            </div>
+                            <div class="text-right">
+                              @forelse($replies as $repl => $re)
+                                {{ $re->comment }}<br><small>Replied On: {{ date('d/M/Y h:i a', strtotime($re->created_at)) }}</small><br>
+                              @empty
+                              @endforelse
+                            </div>
                         </div>                       
                         @empty
                         <div>No comments</div>

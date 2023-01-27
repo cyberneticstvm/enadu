@@ -16,6 +16,9 @@
 	<div class="osahan-notification">
 		<div class="row mb-3">
 			@forelse($feedbacks as $key => $feedback)
+			@php
+				$replies = App\Models\Feedback::where('comment_id', $feedback->id)->get();
+			@endphp
 			<div class="notification d-flex m-0 bg-white shadow-sm mb-1 p-3">
 				<div class="icon pe-3">
 					<span class="icofont-check-circled text-success mb-0 rounded-pill mt-1 fs-1 d-inline-block"></span>
@@ -28,6 +31,21 @@
 					<span>{{ date('d/M/Y h:i a', strtotime($feedback->created_at)) }}</span>
 				</div>
 			</div>
+				@forelse($replies as $repl => $re)
+				<div class="notification d-flex m-0 bg-white shadow-sm mb-1 p-3">					
+					<div class="noti-details l-hght-18 pr-0">
+						<p class="mb-1 fw-bold">{{ $re->comment }}</p>
+						<span class="small text-muted">{{ $re->feedback_category }}</span>
+					</div>
+					<div class="small px-0 ms-auto">
+						<span>{{ date('d/M/Y h:i a', strtotime($re->created_at)) }}</span>
+					</div>
+					<div class="icon pe-3">
+						<span class="icofont-check-circled text-success mb-0 rounded-pill mt-1 fs-1 d-inline-block"></span>
+					</div>
+				</div>
+				@empty
+				@endforelse
 			@empty
 			<div class="col">No History Found!</div>
 			@endforelse

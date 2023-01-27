@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\StaffOrder;
@@ -44,7 +45,22 @@ class AdminController extends Controller
     }
 
     public function feedback(){
-        $feedbacks = Feedback::groupBy('user_id')->where('comment_id', 0)->orderByDesc('id')->get();
+        $feedbacks = Feedback::where('comment_id', 0)->groupBy('user_id')->orderByDesc('id')->get();
         return view('admin.feedback',  compact('feedbacks'));
+    }
+
+    public function showcomment($id){
+        $comment = Feedback::find($id);
+        return view('admin.reply', compact('comment'));
+    }
+
+    public function replycomment(Request $request){
+        $this->validate($request, [
+            'comment' => 'required',
+        ]);
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+        Feedback::create($input);
+        return redirect()->route('admin.feedback')->with('success','Reply submitted successfully');
     }
 }

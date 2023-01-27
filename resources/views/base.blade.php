@@ -48,7 +48,7 @@
 			<a href="/orders"><i class="bi bi-code-square me-2"></i>My Orders</a>
 		</li>
 		<li>
-			<a href="/account"><i class="bi bi-file-break me-2"></i>My Addresses</a>
+			<a href="/address"><i class="bi bi-file-break me-2"></i>My Addresses</a>
 		</li>
 		@if(Auth::user())
 		<li>
@@ -87,6 +87,7 @@
 			<div class="modal-body">
 				<form method="post" action="{{ route('address.save') }}">
 					@csrf
+					<input type="hidden" name="type" value="cart" />
 					<div class="mb-4">
 						<label class="form-label text-muted small mb-1">Name</label>
 						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">

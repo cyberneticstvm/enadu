@@ -23,7 +23,7 @@
 		<div class="text-success mb-2"><i class="bi bi-clock-history me-1"></i> {{ $order->payment_status }}</div>
 		<div class="text-muted small">{{ date('d/M/Y h:i a', strtotime($order->created_at)) }}</div>
 	</div>
-	<a class="stretched-link" href="order-detail.html"></a>
+	<a class="stretched-link" href="#"></a>
 </div>
 @empty
 @endforelse

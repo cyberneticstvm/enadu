@@ -38,11 +38,12 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/account', [AuthController::class, 'account'])->name('account');
     Route::get('/address', [AddressController::class, 'index'])->name('address');
     Route::post('/address', [AddressController::class, 'store'])->name('address.save');
+    Route::delete('/address/{id}', [AddressController::class, 'destroy'])->name('address.delete');
     Route::get('/orders', [UserController::class, 'order'])->name('order');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
     Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
-    Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');
+    Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');    
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
@@ -74,6 +75,8 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
 
     Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
     Route::post('/admin/feedback', [AdminController::class, 'savefeedback'])->name('admin.feedback.save');
+    Route::get('/admin/comment/reply/{id}', [AdminController::class, 'showcomment'])->name('admin.comment');
+    Route::post('/admin/comment/reply', [AdminController::class, 'replycomment'])->name('admin.comment.reply');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){

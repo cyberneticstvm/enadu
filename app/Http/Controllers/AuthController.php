@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Address;
 use Carbon\Carbon;
 use Hash;
 use Session;
@@ -64,8 +65,14 @@ class AuthController extends Controller
         endif;
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
         Auth::login($user, $request->get('remember'));
-        if(Auth::user()->user_type == 'user')
-            return redirect()->route('account')->with('success','User logged in successfully');
+        if(Auth::user()->user_type == 'user'):
+            $addr = Address::where('user', Auth::user()->id)->get();
+            if($addr):
+                return redirect()->route('account')->with('success','User logged in successfully');
+            else:
+                return redirect()->route('address')->with('success','User logged in successfully');
+            endif;
+        endif;
         if(Auth::user()->user_type == 'admin')
             return redirect()->route('admin.dash')->with('success','User logged in successfully');
         if(Auth::user()->user_type == 'staff')

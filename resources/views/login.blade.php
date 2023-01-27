@@ -3,7 +3,7 @@
 <div class="p-3 shadow-sm bg-success danger-nav osahan-home-header">
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h6 class="fw-normal mb-0 text-white d-flex align-items-center">
-			<a class="text-white me-3 fs-4" href="/geebinapp"><i class="bi bi-chevron-left"></i></a>
+			<a class="text-white me-3 fs-4" href="/account"><i class="bi bi-chevron-left"></i></a>
 			Login
 		</h6>
 		<div class="ms-auto d-flex align-items-center">

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
             $table->integer('order_status')->default(0);
-            $table->text('comments')->default(0);
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

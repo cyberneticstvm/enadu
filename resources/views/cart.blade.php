@@ -4,7 +4,7 @@
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h6 class="fw-normal mb-0 text-white d-flex align-items-center">
 			<a class="text-white me-3 fs-4" href="/account"><i class="bi bi-chevron-left"></i></a>
-			My Bag
+			My Cart
 		</h6>
 		<div class="ms-auto d-flex align-items-center">
 			<a class="toggle osahan-toggle fs-4 text-white ms-auto" href="#"><i class="bi bi-list"></i></a>
@@ -142,7 +142,7 @@
     <a href="/" class="col btn btn-warning">Continue Shopping</a>
 </div>
 @else
-<div class="bg-white shadow-sm mb-4 p-3">Your Bag is empty. Click <a href="/">HERE</a> to continue your shopping.</div>
+<div class="bg-white shadow-sm mb-4 p-3">Your Cart is empty. Click <a href="/home">HERE</a> to continue your shopping.</div>
 @endif
 
 

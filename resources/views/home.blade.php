@@ -56,9 +56,9 @@
 											<div class="btn btn-light text-success plus border-0 bg-white"><i class="bi bi-plus"></i></div>
 										</div>
 									</div>
-									<div class="size-btn">												
+									<div class="">												
 										<div class="input-group">
-											<button type="submit" class="col btn-submit btn btn-outline-success">Add to Bag</button>
+											<button type="submit" class="col btn-submit btn btn-success">Add to Cart</button>
 										</div>
 									</div>																			
 								</div>
@@ -71,6 +71,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="input-group p-3">   
+	<a href="/cart" class="col btn btn-submit btn-success">Proceed to Checkout</a>    
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

@@ -20,7 +20,8 @@ class UserController extends Controller
      */
 
     public function profile(){
-        return view('profile');
+        $profile = User::find(Auth::user()->id);
+        return view('profile', compact('profile'));
     }
 
     public function index()
@@ -83,10 +84,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function profileupdate(Request $request, $id){
+        $profile = User::find($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'mobile' => 'required|numeric|digits:10|unique:users,mobile,'.$id,
+        ]);
+        $input = $request->all();
+        $input['password'] = ($request->password) ? Hash::make($request->password) : $profile->getOriginal('password');
+        $profile->update($input);
+        return redirect()->route('profile')
+                        ->with('success','Profile Updated successfully');
+    }
+
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
+        return redirect()->route('profile')
+                        ->with('success','Profile Updated successfully');
     }
 
     /**

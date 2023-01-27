@@ -25,7 +25,7 @@
 	<div class="row">
 		<div class="col text-center p-3">
 			<a href="/feedback"><img src="{{ public_path().'/img/feedback.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">FEEDBACK</span>
+			<span class="text-success fw-bold">GRIEVANCE</span>
 		</div>
 		<div class="col text-center p-3">
 			<a href="/profile"><img src="{{ public_path().'/img/user.png' }}" class="img-fluid" /></a><br>

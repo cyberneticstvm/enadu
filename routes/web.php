@@ -37,6 +37,7 @@ Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/{id}', [UserController::class, 'profileupdate'])->name('profile.update');
     Route::get('/account', [AuthController::class, 'account'])->name('account');
     Route::get('/address', [AddressController::class, 'index'])->name('address');
     Route::post('/address', [AddressController::class, 'store'])->name('address.save');

@@ -11,8 +11,52 @@
 		</div>
 	</div>
 </div>
+@if(session()->has('success'))
+	<div class="alert alert-success">
+		{{ session()->get('success') }}
+	</div>
+@endif
+@if(session()->has('error'))
+	<div class="alert alert-danger">
+		{{ session()->get('error') }}
+	</div>
+@endif
 <div class="p-3">
-	My Profile
+	<h5>My Profile</h5>
+	<form method="post" action="{{ route('profile.update', $profile->id) }}">
+		@csrf
+		@method("PUT")
+		<div class="mb-4">
+			<label class="form-label text-muted small mb-1 req">Full Name </label>
+			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+				<span class="input-group-text bg-white"><i class="bi bi-person text-muted"></i></span>
+				<input type="text" class="form-control" name="name" value="{{ $profile->name }}" placeholder="Full Name">
+			</div>
+			@error('name')
+			<small class="text-danger">{{ $errors->first('name') }}</small>
+			@enderror
+		</div>
+		<div class="mb-4">
+			<label class="form-label text-muted small mb-1 req">Mobile Number</label>
+			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+				<span class="input-group-text bg-white"><i class="bi bi-phone text-muted"></i></span>
+				<input type="text" class="form-control" maxlength="10" name="mobile" value="{{ $profile->mobile }}" placeholder="Mobile Number">
+			</div>
+			@error('mobile')
+			<small class="text-danger">{{ $errors->first('mobile') }}</small>
+			@enderror
+		</div>
+		<div class="mb-4">
+			<label class="form-label text-muted small mb-1 req">Password</label>
+			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+				<span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+				<input type="password" class="form-control" name="password" placeholder="***********">
+			</div>
+		</div>
+		<div class="mb-4">
+			<button type="submit" class="btn btn-submit btn-success btn-lg w-100 shadow">UPDATE</button>
+		</div>
+	</form>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

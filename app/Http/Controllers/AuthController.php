@@ -67,10 +67,10 @@ class AuthController extends Controller
         Auth::login($user, $request->get('remember'));
         if(Auth::user()->user_type == 'user'):
             $addr = Address::where('user', Auth::user()->id)->get();
-            if($addr):
-                return redirect()->route('account')->with('success','User logged in successfully');
+            if($addr->isEmpty()):
+                return redirect()->route('address')->with('success','User logged in successfully');                
             else:
-                return redirect()->route('address')->with('success','User logged in successfully');
+                return redirect()->route('account')->with('success','User logged in successfully');
             endif;
         endif;
         if(Auth::user()->user_type == 'admin')

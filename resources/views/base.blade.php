@@ -36,7 +36,7 @@
 	<ul class="second-nav">
 		<li>
 			<a href="#" class="bg-success sidebar-user d-flex align-items-center py-4 px-3 border-0 mb-0">
-				<img src="{{ public_path().'/img/profile.jpg' }}" class="img-fluid rounded-pill me-3">
+				<img src="{{ public_path().'/img/user-profile	.png' }}" class="img-fluid rounded-pill me-3">
 				<div class="text-white">
 					<h6 class="mb-0">Hi {{ (Auth::user()) ? Auth::user()->name : 'Guest' }},</h6>
 					<small>{{ (Auth::user()) ? Auth::user()->mobile : 'xxxxxxxxxx' }}</small><br>
@@ -106,7 +106,17 @@
 						<label class="form-label text-muted small mb-1">Address</label>
 						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
 							<span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
-							<input type="text" class="form-control" name="address" id="address" placeholder="Enter address" required>
+							<input type="text" class="form-control" name="address1" placeholder="Enter Address" required>
+						</div>
+						@error('address1')
+						<small class="text-danger">{{ $errors->first('address1') }}</small>
+						@enderror
+					</div>
+					<div class="mb-4">
+						<label class="form-label text-muted small mb-1">Location</label>
+						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+							<span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
+							<input type="text" class="form-control" name="address" id="address" placeholder="Enter Location" required>
 						</div>
 						<input type="hidden" name="latitude" id="latitude" value="" />
 						<input type="hidden" name="longitude" id="longitude" value="" />
@@ -139,7 +149,7 @@
 						</div>
 					</div>
 					<div class="input-group p-3">   
-						<button type="submit" class="col btn btn-submit btn-success">Save</a>    
+						<button type="submit" class="col btn btn-submit btn-success">Save</button>    
 					</div>
 				</form>
 			</div>

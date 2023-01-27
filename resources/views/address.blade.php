@@ -23,23 +23,21 @@
 @endif
 <div class="row p-4">
     <h5>My Addresses </h5>
-    @if($addresses)
-        @forelse($addresses as $key => $addr)
-            <div class="col-md-3">
-                {{ $addr->contact_name }}<br>
-                {{ $addr->mobile }}<br>
-                {{ $addr->address }}<br>
-                {{ $addr->pincode }}<br>
-                {{ $addr->landmark }}<br>
-                <form method="post" action="{{ route('address.delete', $addr->id) }}">
-                    @csrf 
-                    @method("DELETE")
-                    <button type="submit" class="btn btn-link" onclick="javascript: return confirm('Are you sure want to delete this Record?');">Remove</button>
-                </form>
-            </div>
-        @empty
-        @endforelse
-    @endif
+    @forelse($addresses as $key => $addr)
+        <div class="col">
+            {{ $addr->contact_name }}<br>
+            {{ $addr->mobile }}<br>
+            {{ $addr->address }}<br>
+            {{ $addr->pincode }}<br>
+            {{ $addr->landmark }}<br>
+            <!--<form method="post" action="{{ route('address.delete', $addr->id) }}">
+                @csrf 
+                @method("DELETE")
+                <button type="submit" class="btn btn-link" onclick="javascript: return confirm('Are you sure want to delete this Record?');">Remove</button>
+            </form>-->
+        </div>
+    @empty
+    @endforelse
 </div>
 <div class="p-4">
     <form method="post" action="{{ route('address.save') }}">
@@ -69,7 +67,17 @@
             <label class="form-label text-muted small mb-1">Address</label>
             <div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
                 <span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
-                <input type="text" class="form-control" name="address" id="address" placeholder="Enter address" required>
+                <input type="text" class="form-control" name="address1" placeholder="Enter Address" required>
+            </div>
+            @error('address1')
+			<small class="text-danger">{{ $errors->first('address1') }}</small>
+			@enderror
+        </div>
+        <div class="mb-4">
+            <label class="form-label text-muted small mb-1">Location</label>
+            <div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
+                <span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
+                <input type="text" class="form-control" name="address" id="address" placeholder="Enter Location" required>
             </div>
             <input type="hidden" name="latitude" id="latitude" value="" />
             <input type="hidden" name="longitude" id="longitude" value="" />
@@ -114,7 +122,7 @@
 			@enderror
         </div>
         <div class="input-group p-3">   
-            <button type="submit" class="col btn btn-submit btn-success">Save</a>    
+            <button type="submit" class="col btn btn-submit btn-success">Save</button>    
         </div>
     </form>
 </div>

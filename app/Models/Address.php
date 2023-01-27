@@ -14,6 +14,7 @@ class Address extends Model
         'contact_name',
         'mobile',
         'address',
+        'address1',
         'latitude',
         'longitude',
         'pincode',

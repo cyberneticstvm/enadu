@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\StaffOrder;
 use App\Models\Feedback;
+use App\Models\MileStone;
 use DB;
 
 class AdminController extends Controller
@@ -16,7 +17,27 @@ class AdminController extends Controller
     }    
 
     public function staffdash(){
-        return view('staff.dash');
+        $orders = StaffOrder::leftJoin('orders as o', 'o.id', '=', 'staff_orders.order_id')->leftJoin('addresses as a', 'a.user', '=', 'o.user')->where('user_id', Auth::user()->id)->whereIn('o.order_status', [1,2,3])->selectRaw("o.id as oid, o.amount, o.payment_type, a.*")->get();
+        return view('staff.dash', compact('orders'));
+    }
+
+    public function delivery($id){
+        $order = Order::find($id);
+        $status = DB::table('order_status')->get();
+        return view('staff.delivery', compact('order', 'status'));
+    }
+
+    public function updatedelivery(Request $request){
+        $this->validate($request, [
+            'comments' => 'required',
+            'order_status' => 'required',
+        ]);
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+        MileStone::create($input);
+        Order::where('id', $request->order_id)->update(['order_status' => $request->order_status]);
+        StaffOrder::where('order_id', $request->order_id)->update(['order_status' => $request->order_status]);
+        return redirect()->route('staff.dash')->with('success','Order updated successfully');
     }
 
     public function order(){

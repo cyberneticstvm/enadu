@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Feedback;
 use Hash;
+use DB;
 use Session;
 
 class UserController extends Controller
@@ -64,7 +65,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find($id);
+        $ostatus = DB::table('order_status')->where('id', $order->order_status)->value('name');
+        $ostaff = DB::table('staff_orders')->where('order_id', $order->id)->first();
+        $milestones = DB::table('mile_stones as m')->leftJoin('order_status as s', 'm.order_status', '=', 's.id')->where('order_id', $order->id)->get();
+        return view('milestone', compact('order', 'ostatus', 'ostaff', 'milestones'));
     }
 
     /**

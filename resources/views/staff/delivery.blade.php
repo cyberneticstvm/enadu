@@ -4,7 +4,7 @@
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h6 class="fw-normal mb-0 text-dark d-flex align-items-center">
 			<a class="text-dark me-3 fs-4" href="/"><i class="bi bi-chevron-left"></i></a>
-			Dash
+			Status Update
 		</h6>
 		<div class="ms-auto d-flex align-items-center">
 			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
@@ -22,22 +22,41 @@
     </div>
 @endif
 <div class="p-3">
-    <div class="row">
-        @forelse($orders as $key => $order)
-            <div class="col-md-3 p-3">
-                Order ID: {{ $order->oid }}<br>
-                Order Total: ₹{{ $order->amount }}<br>
-                Payment Mode: {{ $order->payment_type }}<br>
-                <u>Address:</u> <br>{{ $order->contact_name }}<br>
-                {{ $order->mobile }}<br>
-                {{ $order->address }}<br>
-                {{ $order->landmark }}<br>
-                {{ $order->pincode }}<br>
-                <a href="/staff/delivery/update/{{$order->oid}}">Update</a></small>
+    <form method="post" action="{{ route('staff.delivery.update') }}">
+        @csrf
+        <input type="hidden" name="order_id" value="{{ $order->id }}" />
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="req">Comments</label>
+                    <input type="text" name="comments" class="form-control" />
+                </div>
+                @error('comments')
+                <small class="text-danger">{{ $errors->first('comments') }}</small>
+                @enderror
             </div>
-        @empty
-        @endforelse
-    </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="req">Order Status</label>
+                    <select class="form-control" name="order_status">
+                        <option value="">Select</option>
+                        @forelse($status as $key => $stat)
+                        <option value="{{ $stat->id }}" {{ ($order && $order->order_status == $stat->id) ? 'selected': '' }}>{{ $stat->name }}</option>
+                        @empty
+                        @endforelse
+                    </select>
+                </div>
+                @error('order_status')
+                <small class="text-danger">{{ $errors->first('order_status') }}</small>
+                @enderror
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-submit btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
 </div>
 <!-- <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

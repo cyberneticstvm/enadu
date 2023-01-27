@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
     Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
     Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');    
+    Route::get('/milestone/{id}', [UserController::class, 'show'])->name('milestone');    
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
@@ -81,6 +82,8 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){
     Route::get('/staff/dash', [AdminController::class, 'staffdash'])->name('staff.dash');
+    Route::get('/staff/delivery/update/{id}', [AdminController::class, 'delivery'])->name('staff.delivery');
+    Route::post('/staff/delivery/update', [AdminController::class, 'updatedelivery'])->name('staff.delivery.update');
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

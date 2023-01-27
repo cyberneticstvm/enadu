@@ -16,8 +16,9 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->user_type == 'user'){
+        if ($request->user()->user_type != 'user'){
             return response()->json('oops! You dont have permission to access this section.');
+            //return redirect('geebinapp');
         }  
         return $next($request);
     }

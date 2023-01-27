@@ -17,8 +17,8 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if ($request->user()->user_type != 'admin'){
-            //return response()->json('oops! You dont have permission to access this section.');
-            return redirect('geebinapp');
+            return response()->json('oops! You dont have permission to access this section.');
+            //return redirect('geebinapp');
         }
         return $next($request);
     }

@@ -139,7 +139,7 @@
 </div>
 @endif
 <div class="input-group p-3">
-    <a href="/" class="col btn btn-warning">Continue Shopping</a>
+    <a href="/home" class="col btn btn-warning">Continue Shopping</a>
 </div>
 @else
 <div class="bg-white shadow-sm mb-4 p-3">Your Cart is empty. Click <a href="/home">HERE</a> to continue your shopping.</div>

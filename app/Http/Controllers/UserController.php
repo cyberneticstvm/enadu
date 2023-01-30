@@ -165,7 +165,7 @@ class UserController extends Controller
     }
 
     public function service(){
-        $addresses = Address::all();
+        $addresses = Address::where('user', Auth::user()->id)->get();
         $products = Product::where('available_for_service', 'Y')->get();
         return view('service', compact('addresses', 'products'));
     }

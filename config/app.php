@@ -15,6 +15,14 @@ return [
     |
     */
 
+    'sms' => [
+        'port' => env('SMS_PORT', ''),
+        'api_id'  => env('SMS_API_ID', ''),
+        'sender_id'  => env('SMS_SENDER_ID', ''),
+        'dlt_id'  => env('SMS_DLT_ID', ''),
+        'template_id'  => env('SMS_TEMPLATE_ID', ''),
+    ],
+
     'google_api_key' => env('GOOGLE_API_KEY', ''),
 
     'name' => env('APP_NAME', 'Laravel'),

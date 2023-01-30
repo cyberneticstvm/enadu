@@ -51,7 +51,11 @@ $(function(){
 
     $(".addrServ").click(function(){ alert('asdf')
         $("#addrcat").val('service');
-    });    
+    });
+    
+    $(".otp").keyup(function(){
+        $(this).parent().next('div').find('.otp').focus();
+    });
 });
 
 setTimeout(function () {

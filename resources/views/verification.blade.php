@@ -28,16 +28,16 @@
             <input type="hidden" name="user_id" value="{{ $user->id }}" />
             <div class="d-flex justify-content-center gap-3">
                 <div class="col-2">
-                    <input type="text" class="form-control form-control-lg text-center" value="" required minlength="1" maxlength="1" name="val1" required>
+                    <input type="text" class="form-control form-control-lg text-center otp" value="" required minlength="1" maxlength="1" name="val1" placeholder="*" required>
                 </div>
                 <div class="col-2">
-                    <input type="text" class="form-control form-control-lg text-center" value="" required minlength="1" maxlength="1" name="val2" required>
+                    <input type="text" class="form-control form-control-lg text-center otp" value="" required minlength="1" maxlength="1" name="val2" placeholder="*" required>
                 </div>
                 <div class="col-2">
-                    <input type="text" class="form-control form-control-lg text-center" value="" required minlength="1" maxlength="1" name="val3" required>
+                    <input type="text" class="form-control form-control-lg text-center otp" value="" required minlength="1" maxlength="1" name="val3" placeholder="*" required>
                 </div>
                 <div class="col-2">
-                    <input type="text" class="form-control form-control-lg text-center" value="" required minlength="1" maxlength="1" name="val4" required>
+                    <input type="text" class="form-control form-control-lg text-center otp" value="" required minlength="1" maxlength="1" name="val4" placeholder="*" required>
                 </div>
             </div>
             <div class="mb-4 mt-4">

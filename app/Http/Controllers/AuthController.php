@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Hash;
 use Session;
 use DB;
-
+use Config;
 
 class AuthController extends Controller
 {
@@ -41,7 +41,26 @@ class AuthController extends Controller
 
     public function generateOtp($user){
         $user = User::find($user->id);
-        User::where('id', $user->id)->update(['otp' => '1234']);
+        $otp = random_int(1000, 9999);
+        User::where('id', $user->id)->update(['otp' => $otp]);
+        $msg = urlencode("Use $otp to verify your mobile number with GeeBin. In case you did not enter your number on our APP, Please ignore this message.");
+        $port = Config::get('app.sms.port');
+        $api_id = Config::get('app.sms.api_id');
+        $sender_id = Config::get('app.sms.sender_id');
+        $dlt_id = Config::get('app.sms.dlt_id');
+        $template_id = Config::get('app.sms.template_id');
+        $mobile = $user->mobile;
+        $url = "http://sms.liexa.in/api/web?id=$api_id&senderid=$sender_id&to=$mobile&msg=$msg&port=$port&dltid=$dlt_id&tempid=$template_id";
+        //$data = $this->sendSMS($url);
+    }
+    
+    public function sendSMS($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close ($ch);
+        return json_decode($response, true);
     }
 
     public function otpcheck(Request $request){        

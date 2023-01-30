@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col text-center p-3">
 			<a href="/service"><img src="{{ public_path().'/img/service.png' }}" class="img-fluid" /></a><br>
-			<span class="text-success fw-bold">GRIEVANCE</span>
+			<span class="text-success fw-bold">SERVICE</span>
 		</div>
 	</div>
 </div>

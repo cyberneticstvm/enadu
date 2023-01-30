@@ -36,7 +36,7 @@
 	<ul class="second-nav">
 		<li>
 			<a href="#" class="bg-success sidebar-user d-flex align-items-center py-4 px-3 border-0 mb-0">
-				<img src="{{ public_path().'/img/user-profile	.png' }}" class="img-fluid rounded-pill me-3">
+				<img src="{{ public_path().'/img/avatar.png' }}" class="img-fluid rounded-pill me-3">
 				<div class="text-white">
 					<h6 class="mb-0">Hi {{ (Auth::user()) ? Auth::user()->name : 'Guest' }},</h6>
 					<small>{{ (Auth::user()) ? Auth::user()->mobile : 'xxxxxxxxxx' }}</small><br>

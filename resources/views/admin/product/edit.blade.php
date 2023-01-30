@@ -76,6 +76,19 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group">
+                                            <label class="req">Available for Service</label>
+                                            <select class="form-control" name="available_for_service">
+                                                <option value="">Select</option>
+                                                <option value="Y" {{ ($product->available_for_service == 'Y') ? 'selected' : '' }}>Yes</option>
+                                                <option value="N" {{ ($product->available_for_service == 'N') ? 'selected' : '' }}>No</option>
+                                            </select>
+                                        </div>
+                                        @error('available_for_service')
+                                        <small class="text-danger">{{ $errors->first('available_for_service') }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
                                             <label class="req">Status</label>
                                             <select class="form-control" name="status">
                                                 <option value="">Select</option>

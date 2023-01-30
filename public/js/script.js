@@ -47,7 +47,11 @@ $(function(){
             return false;
         }
         
-    })
+    });
+
+    $(".addrServ").click(function(){ alert('asdf')
+        $("#addrcat").val('service');
+    });    
 });
 
 setTimeout(function () {

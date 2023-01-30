@@ -14,6 +14,7 @@ class Product extends Model
         'category_id',
         'price',
         'description',
+        'available_for_service',
         'image',
         'status',
     ];
@@ -24,5 +25,9 @@ class Product extends Model
 
     public function orderdetail(){
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function services(){
+        return $this->hasMany(Service::class);
     }
 }

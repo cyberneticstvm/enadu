@@ -50,6 +50,8 @@ class AddressController extends Controller
         $address = Address::create($input);
         if($request->type == 'cart'):
             return redirect()->route('cart')->with('success','Address added successfully');
+        elseif($request->type == 'service'):
+            return redirect()->route('service')->with('success','Address added successfully')->withInput($request->all());
         else:
             return redirect()->route('address')->with('success','Address added successfully');
         endif;

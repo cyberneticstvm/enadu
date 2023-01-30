@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Feedback;
+use App\Models\Product;
+use App\Models\Service;
 use Hash;
 use DB;
 use Session;
@@ -159,5 +162,23 @@ class UserController extends Controller
         $input['comment_id'] = 0;
         Feedback::create($input);
         return redirect()->route('feedback')->with('success','Feedback submitted successfully');
+    }
+
+    public function service(){
+        $addresses = Address::all();
+        $products = Product::where('available_for_service', 'Y')->get();
+        return view('service', compact('addresses', 'products'));
+    }
+
+    public function saveservice(Request $request){
+        $this->validate($request, [
+            'product' => 'required',
+            'ptype' => 'required',
+            'address' => 'required',
+        ]);
+        $input = $request->all();
+        $input['created_by'] = Auth::user()->id;
+        Service::create($input);
+        return redirect()->route('service')->with('success','Service request submitted successfully');
     }
 }

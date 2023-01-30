@@ -32,6 +32,12 @@
 			<span class="text-success fw-bold">ACCOUNT</span>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col text-center p-3">
+			<a href="/service"><img src="{{ public_path().'/img/service.png' }}" class="img-fluid" /></a><br>
+			<span class="text-success fw-bold">GRIEVANCE</span>
+		</div>
+	</div>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

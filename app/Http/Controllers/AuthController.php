@@ -34,8 +34,31 @@ class AuthController extends Controller
         $input['password'] = Hash::make($request->password);
         $user = User::create($input);
         //Auth::login($user);
-        return redirect()->route('login')
-                        ->with('success','User Registered successfully');
+        //return redirect()->route('login')->with('success','User Registered successfully');
+        $this->generateOtp($user);
+        return view('verification', compact('user'));
+    }
+
+    public function generateOtp($user){
+        $user = User::find($user->id);
+        User::where('id', $user->id)->update(['otp' => '1234']);
+    }
+
+    public function otpcheck(Request $request){        
+        $this->validate($request, [
+            'val1' => 'required',
+            'val2' => 'required',
+            'val3' => 'required',
+            'val4' => 'required',
+        ]);
+        $otp = $request->val1.$request->val2.$request->val3.$request->val4;        
+        $u = User::where('id', $request->user_id)->where('otp', $otp)->first();
+        if(empty($u)):
+            return redirect()->back()->with("error", "Something went wrong. Please try again.")->withInput($request->all());
+        else:
+            $upd = User::where('id', $u->id)->update(['otp_verified_at' => Carbon::now()]);
+            return redirect()->route('login')->with('success','OTP verified successfully');            
+        endif;
     }
 
     public function login(){
@@ -64,6 +87,10 @@ class AuthController extends Controller
             return back()->with('error','Your mobile and password combination is wrong.')->withInput($request->all());
         endif;
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        if(empty($user->otp_verified_at)):
+            $this->generateOtp($user);
+            return view('verification', compact('user'));
+        endif;
         Auth::login($user, $request->get('remember'));
         if(Auth::user()->user_type == 'user'):
             $addr = Address::where('user', Auth::user()->id)->get();

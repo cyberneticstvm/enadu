@@ -87,7 +87,7 @@
 			<div class="modal-body">
 				<form method="post" action="{{ route('address.save') }}">
 					@csrf
-					<input type="hidden" name="type" value="cart" />
+					<input type="hidden" name="type" id="addrcat" value="cart" />
 					<div class="mb-4">
 						<label class="form-label text-muted small mb-1">Name</label>
 						<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">

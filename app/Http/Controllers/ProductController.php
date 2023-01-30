@@ -50,6 +50,7 @@ class ProductController extends Controller
             'category_id' => 'required',
             'price' => 'required',
             'image' => 'required|mimes:png,jpg,jpeg,webp|max:5120',
+            'available_for_service' => 'required',
             'status' => 'required',
         ]);
         $input = $request->all();

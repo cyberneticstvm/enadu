@@ -30,6 +30,8 @@ Route::get('/cart/delete', [CartController::class, 'deletecart'])->name('cart.de
 
 Route::get('/signup', [AuthController::class, 'register'])->name('register');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
+Route::get('/otp', [AuthController::class, 'otp'])->name('otp');
+Route::post('/otp', [AuthController::class, 'otpcheck'])->name('otp.check');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
 
@@ -48,6 +50,8 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
     Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');    
     Route::get('/milestone/{id}', [UserController::class, 'show'])->name('milestone');    
+    Route::get('/service', [UserController::class, 'service'])->name('service');
+    Route::post('/service', [UserController::class, 'saveservice'])->name('service.save');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){

@@ -56,6 +56,17 @@ $(function(){
     $(".otp").keyup(function(){
         $(this).parent().next('div').find('.otp').focus();
     });
+
+    $(".ptype").change(function(){
+        var cls = $(this).val();
+        if(cls == 'direct'){
+            $(".direct").removeClass("d-none");
+            $(".localbody").addClass("d-none");
+        }else{
+            $(".direct").addClass("d-none");
+            $(".localbody").removeClass("d-none");
+        }
+    });
 });
 
 setTimeout(function () {

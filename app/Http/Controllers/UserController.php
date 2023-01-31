@@ -167,7 +167,11 @@ class UserController extends Controller
     public function service(){
         $addresses = Address::where('user', Auth::user()->id)->get();
         $products = Product::where('available_for_service', 'Y')->get();
-        return view('service', compact('addresses', 'products'));
+        $districts = DB::table('districts')->orderBy('name')->get();
+        $municipalities = DB::table('municipalities')->orderBy('name')->get();
+        $corporations = DB::table('corporations')->orderBy('name')->get();
+        $panchayats = DB::table('grama_panchayats')->orderBy('name')->get();
+        return view('service', compact('addresses', 'products', 'districts', 'municipalities', 'corporations', 'panchayats'));
     }
 
     public function saveservice(Request $request){

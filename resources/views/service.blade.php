@@ -45,7 +45,7 @@
             <label class="form-label text-muted small mb-1">Purchase Type</label>
             <div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
                 <span class="input-group-text bg-white"><i class="bi bi-gear text-muted"></i></span>
-                <select class="form-control" name="ptype">
+                <select class="form-control ptype" name="ptype">
                     <option value="">Select</option>
                     <option value="direct">Direct Purchase</option>
                     <option value="localbody">Local Body</option>
@@ -55,11 +55,53 @@
 			<small class="text-danger">{{ $errors->first('ptype') }}</small>
 			@enderror
         </div>
-        <div class="mb-4">
+        <div class="mb-4 d-none direct">
             <label class="form-label text-muted small mb-1">Franchise Name if Direct Purchase</label>
             <div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
                 <span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
                 <input type="text" class="form-control" name="ptype_address" placeholder="Franchise Name">
+            </div>
+        </div>
+        <div class="localbody d-none">
+            <div class="mb-4">
+                <label class="form-label text-muted small mb-1">District</label>
+                <select class="form-control district" name="district">
+                    <option value="">Select</option>
+                    @forelse($districts as $key => $district)
+                    <option value="{{ $district->id }}">{{ $district->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="form-label text-muted small mb-1">Corporation</label>
+                <select class="form-control corporation" name="corporation">
+                    <option value="">Select</option>
+                    @forelse($corporations as $key => $corp)
+                    <option value="{{ $corp->id }}">{{ $corp->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="form-label text-muted small mb-1">Municipality</label>
+                <select class="form-control municipality" name="municipality">
+                    <option value="">Select</option>
+                    @forelse($municipalities as $key => $mun)
+                    <option value="{{ $mun->id }}">{{ $mun->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="form-label text-muted small mb-1">Panchayath</label>
+                <select class="form-control panchayath" name="grama_panchayath">
+                    <option value="">Select</option>
+                    @forelse($panchayats as $key => $pan)
+                    <option value="{{ $pan->id }}">{{ $pan->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
             </div>
         </div>
         <div class="mb-4">

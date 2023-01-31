@@ -26,6 +26,7 @@
         <form class="my-5" method="post" action="{{ route('otp.check') }}">
             @csrf
             <input type="hidden" name="user_id" value="{{ $user->id }}" />
+            <input type="hidden" name="type" value="{{ $type }}" />
             <div class="d-flex justify-content-center gap-3">
                 <div class="col-2">
                     <input type="text" class="form-control form-control-lg text-center otp" value="" required minlength="1" maxlength="1" name="val1" placeholder="*" required>

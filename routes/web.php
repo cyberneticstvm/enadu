@@ -34,6 +34,10 @@ Route::get('/otp', [AuthController::class, 'otp'])->name('otp');
 Route::post('/otp', [AuthController::class, 'otpcheck'])->name('otp.check');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginn'])->name('loginn');
+Route::get('/forgot', [AuthController::class, 'forgot'])->name('forgot');
+Route::post('/forgot', [AuthController::class, 'forgotpwd'])->name('forgotpwd');
+Route::get('/changepwd', [AuthController::class, 'changepwd1'])->name('changepwd1');
+Route::post('/changepwd', [AuthController::class, 'changepwd'])->name('changepwd');
 
 Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 

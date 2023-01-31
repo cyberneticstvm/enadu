@@ -22,6 +22,10 @@ class AuthController extends Controller
         endif;
     }
 
+    public function otp(){
+
+    }
+
     public function signup(Request $request){
         $this->validate($request, [
             'name' => 'required',
@@ -32,11 +36,11 @@ class AuthController extends Controller
         $input['user_type'] = 'user';
         $input['email'] = $request->mobile;
         $input['password'] = Hash::make($request->password);
-        $user = User::create($input);
+        $user = User::create($input); $type = 'login';
         //Auth::login($user);
         //return redirect()->route('login')->with('success','User Registered successfully');
         $this->generateOtp($user);
-        return view('verification', compact('user'));
+        return view('verification', compact('user', 'type'));
     }
 
     public function generateOtp($user){
@@ -63,6 +67,28 @@ class AuthController extends Controller
         return json_decode($response, true);
     }
 
+    public function forgot(){
+        return view('forgot-password');
+    }
+
+    public function changepwd1(){
+        return view('change-password');
+    }
+
+    public function forgotpwd(Request $request){
+        $this->validate($request, [
+            'mobile' => 'required|numeric|digits:10',
+        ]);
+        $user = User::where('mobile', $request->mobile)->first();
+        if($user):
+            $this->generateOtp($user);
+            $type = 'forgot';
+            return view('verification', compact('user', 'type'));
+        else:
+            return redirect()->back()->with("error", "Provided mobile number is not found in the records.")->withInput($request->all());
+        endif;
+    }
+
     public function otpcheck(Request $request){        
         $this->validate($request, [
             'val1' => 'required',
@@ -75,9 +101,22 @@ class AuthController extends Controller
         if(empty($u)):
             return redirect()->back()->with("error", "Something went wrong. Please try again.")->withInput($request->all());
         else:
-            $upd = User::where('id', $u->id)->update(['otp_verified_at' => Carbon::now()]);
-            return redirect()->route('login')->with('success','OTP verified successfully');            
+            if($request->type == 'login'):
+                $upd = User::where('id', $u->id)->update(['otp_verified_at' => Carbon::now()]);
+                return redirect()->route('login')->with('success','OTP verified successfully');
+            else:
+                return redirect()->route('changepwd1', ['user' => $u])->with('success','OTP verified successfully');
+            endif;
         endif;
+    }
+
+    public function changepwd(Request $request){
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:6',
+        ]);
+        $pwd = Hash::make($request->password);
+        $upd = User::where('id', $request->user_id)->update(['password' => $pwd]);
+        return redirect()->route('login')->with('success','Password changed successfully');
     }
 
     public function login(){
@@ -108,7 +147,8 @@ class AuthController extends Controller
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
         if(empty($user->otp_verified_at)):
             $this->generateOtp($user);
-            return view('verification', compact('user'));
+            $type = 'login';
+            return view('verification', compact('user', 'type'));
         endif;
         Auth::login($user, $request->get('remember'));
         if(Auth::user()->user_type == 'user'):

@@ -97,7 +97,7 @@ class AuthController extends Controller
             'val4' => 'required',
         ]);
         $otp = $request->val1.$request->val2.$request->val3.$request->val4;        
-        $u = User::where('id', $request->user_id)->where('otp', $otp)->first();
+        $u = User::where('id', $request->user_id)->where('otp', $otp)->get()->first();
         if(empty($u)):
             return redirect()->back()->with("error", "Something went wrong. Please try again.")->withInput($request->all());
         else:
@@ -105,7 +105,7 @@ class AuthController extends Controller
                 $upd = User::where('id', $u->id)->update(['otp_verified_at' => Carbon::now()]);
                 return redirect()->route('login')->with('success','OTP verified successfully');
             else:
-                return redirect()->route('changepwd1', ['user' => $u])->with('success','OTP verified successfully');
+                return redirect()->route('changepwd1')->with(['success' => 'OTP verified successfully', 'user' => $u]);
             endif;
         endif;
     }

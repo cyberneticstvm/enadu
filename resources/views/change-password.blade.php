@@ -22,10 +22,10 @@
             {{ session()->get('error') }}
         </div>
     @endif
-	@php $user_id = Request::get('user') @endphp
+	@php $user = Session::get('user') @endphp
 	<form method="post" action="{{ route('changepwd') }}">
 		@csrf
-        <input type="hidden" name="user_id" value="{{ $user_id }}" />
+        <input type="hidden" name="user_id" value="{{ $user->id }}" />
 		<div class="mb-4">
 			<label class="form-label text-muted small mb-1 req">New Password</label>
 			<div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">

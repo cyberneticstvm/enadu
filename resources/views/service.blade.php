@@ -74,34 +74,11 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label class="form-label text-muted small mb-1">Corporation</label>
-                <select class="form-control corporation" name="corporation">
+                <label class="form-label text-muted small mb-1">Localbody</label>
+                <select class="form-control localbodysel" name="localbody">
                     <option value="">Select</option>
-                    @forelse($corporations as $key => $corp)
-                    <option value="{{ $corp->id }}">{{ $corp->name }}</option>
-                    @empty
-                    @endforelse
                 </select>
-            </div>
-            <div class="mb-4">
-                <label class="form-label text-muted small mb-1">Municipality</label>
-                <select class="form-control municipality" name="municipality">
-                    <option value="">Select</option>
-                    @forelse($municipalities as $key => $mun)
-                    <option value="{{ $mun->id }}">{{ $mun->name }}</option>
-                    @empty
-                    @endforelse
-                </select>
-            </div>
-            <div class="mb-4">
-                <label class="form-label text-muted small mb-1">Panchayath</label>
-                <select class="form-control panchayath" name="grama_panchayath">
-                    <option value="">Select</option>
-                    @forelse($panchayats as $key => $pan)
-                    <option value="{{ $pan->id }}">{{ $pan->name }}</option>
-                    @empty
-                    @endforelse
-                </select>
+                <input type="hidden" id="localbody_type" name="localbody_type" value="dir" />
             </div>
         </div>
         <div class="mb-4">

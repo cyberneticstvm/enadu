@@ -168,10 +168,7 @@ class UserController extends Controller
         $addresses = Address::where('user', Auth::user()->id)->get();
         $products = Product::where('available_for_service', 'Y')->get();
         $districts = DB::table('districts')->orderBy('name')->get();
-        $municipalities = DB::table('municipalities')->orderBy('name')->get();
-        $corporations = DB::table('corporations')->orderBy('name')->get();
-        $panchayats = DB::table('grama_panchayats')->orderBy('name')->get();
-        return view('service', compact('addresses', 'products', 'districts', 'municipalities', 'corporations', 'panchayats'));
+        return view('service', compact('addresses', 'products', 'districts'));
     }
 
     public function saveservice(Request $request){
@@ -184,5 +181,29 @@ class UserController extends Controller
         $input['created_by'] = Auth::user()->id;
         Service::create($input);
         return redirect()->route('service')->with('success','Service request submitted successfully');
+    }
+
+    public function localbody($district){
+        $op = "";
+        $corps = DB::table('corporations')->where('district', $district)->get();
+        $munis = DB::table('municipalities')->where('district', $district)->get();
+        $pans = DB::table('grama_panchayats')->where('district', $district)->get();
+        $op .= "<option value=''>Select</option>";
+        $op .= "<optgroup label='Corporation' id='corp'>";
+            foreach($corps as $key => $corp):
+                $op .= "<option value='".$corp->id."'>".$corp->name."</option>";
+            endforeach;
+        $op .= "</optgroup>";
+        $op .= "<optgroup label='Municipalities' id='mun'>";
+            foreach($munis as $key => $mun):
+                $op .= "<option value='".$mun->id."'>".$mun->name."</option>";
+            endforeach;
+        $op .= "</optgroup>";
+        $op .= "<optgroup label='Grama Panchayats' id='pan'>";
+            foreach($pans as $key => $pan):
+                $op .= "<option value='".$pan->id."'>".$pan->name."</option>";
+            endforeach;
+        $op .= "</optgroup>";
+        echo $op;
     }
 }

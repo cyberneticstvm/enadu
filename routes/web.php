@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/milestone/{id}', [UserController::class, 'show'])->name('milestone');    
     Route::get('/service', [UserController::class, 'service'])->name('service');
     Route::post('/service', [UserController::class, 'saveservice'])->name('service.save');
+    Route::get('/localbody/{district}', [UserController::class, 'localbody'])->name('localbody');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){

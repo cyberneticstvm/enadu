@@ -67,6 +67,27 @@ $(function(){
             $(".localbody").removeClass("d-none");
         }
     });
+
+    $(".district").change(function(){
+        var district = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: '/localbody/'+district,
+            data: {'district': district},
+            success: function(response){
+                $(".localbodysel").html(response);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log(XMLHttpRequest);
+            }
+        });
+    });
+
+    $(".localbodysel").change(function(){
+        var selected = $(':selected', this);
+        var ltype = selected.closest('optgroup').attr('id');
+        $("#localbody_type").val(ltype);
+    })
 });
 
 setTimeout(function () {

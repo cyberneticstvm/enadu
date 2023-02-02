@@ -186,8 +186,8 @@ class UserController extends Controller
     public function localbody($district){
         $op = "";
         $corps = DB::table('corporations')->where('district', $district)->get();
-        $munis = DB::table('municipalities')->where('district', $district)->get();
-        $pans = DB::table('grama_panchayats')->where('district', $district)->get();
+        $munis = DB::table('municipalities')->where('district', $district)->orderByAsc('name')->get();
+        $pans = DB::table('grama_panchayats')->where('district', $district)->orderByAsc('name')->get();
         $op .= "<option value=''>Select</option>";
         $op .= "<optgroup label='Corporation' id='corp'>";
             foreach($corps as $key => $corp):

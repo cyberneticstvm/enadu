@@ -42,6 +42,7 @@
 						<div class="tic-div px-3 pb-3">
 							<p class="mb-1 text-black">{{ $product->name }}</p>
 							<h6 class="card-title mt-2 mb-3 text-success fw-bold">₹{{ $product->price }} <small class="text-decoration-line-through text-muted small fw-light">₹{{ number_format($product->price + (($product->price*25)/100), 2) }}</small></h6>
+							<a href="#" data-toggle="tooltip" data-placement="top" class="mb-1 text-black" title="{{ $product->description }}">Description</a>
 							<form method="post" action="{{ route('cart.add') }}">
 								@csrf
 								<input type="hidden" name="product_id" value="{{ $product->id }}" />

@@ -12,6 +12,8 @@ $(function(){
         }
     });
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     $(".cartQty").change(function(){
         var qty = $(this).val();
         var pdct = $(this).data('pdct');

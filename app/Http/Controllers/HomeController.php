@@ -23,7 +23,7 @@ class HomeController extends Controller
                 return view('staff.dash');
             endif;
         else:
-            return view('index');
+            return view('login');
         endif;
     }
 }

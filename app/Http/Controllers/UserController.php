@@ -206,4 +206,8 @@ class UserController extends Controller
         $op .= "</optgroup>";
         echo $op;
     }
+
+    public function contact(){
+        return view('contact-us');
+    }
 }

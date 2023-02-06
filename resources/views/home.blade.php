@@ -36,7 +36,7 @@
 				<div class="text-dark col-6 px-0 border-bottom border-end position-relative">
 					<div class="list_item_gird m-0 bg-white listing-item">
 						<span class="badge bg-success m-3 position-absolute">25% OFF</span>
-						<div class="list-item-img p-4">
+						<div class="list-item-img p-4 zoom" id="prod_{{$product->id}}">
 							<img src="{{ public_path().'/storage/products/'.$product->image }}" class="img-fluid p-3">
 						</div>
 						<div class="tic-div px-3 pb-3">

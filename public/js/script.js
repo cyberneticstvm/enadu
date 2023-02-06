@@ -89,13 +89,9 @@ $(function(){
         var selected = $(':selected', this);
         var ltype = selected.closest('optgroup').attr('id');
         $("#localbody_type").val(ltype);
-    });
-
-    $('#prod_1').zoom();
+    })
 });
 
 setTimeout(function () {
     $(".alert").hide('slow');
 }, 3000);
-
-

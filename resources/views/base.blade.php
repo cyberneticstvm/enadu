@@ -169,7 +169,6 @@
 
 	<script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_api_key')}}&libraries=places">
 		</script>	
-	<script type="text/javascript" src="{{ public_path().'/js/jquery.zoom.js' }}"></script>
 	<script type="2b1840b241899e59fb500706-text/javascript" src="{{ public_path().'/js/script.js' }}"></script>
 	<script>
 		var options = {

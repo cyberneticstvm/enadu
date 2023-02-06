@@ -42,7 +42,8 @@
 						<div class="tic-div px-3 pb-3">
 							<p class="mb-1 text-black">{{ $product->name }}</p>
 							<h6 class="card-title mt-2 mb-3 text-success fw-bold">₹{{ $product->price }} <small class="text-decoration-line-through text-muted small fw-light">₹{{ number_format($product->price + (($product->price*25)/100), 2) }}</small></h6>
-							<a href="#" data-toggle="tooltip" data-placement="top" class="mb-1 text-black" title="{{ $product->description }}">Description</a>
+							<!--<a href="#" data-toggle="tooltip" data-placement="top" class="mb-1 text-black" title="{{ $product->description }}">Description</a>-->
+							<div class="text-center mb-3"><a href="#" data-bs-toggle="modal" data-bs-target="#prod{{$product->id}}">Quick View</a></div>
 							<form method="post" action="{{ route('cart.add') }}">
 								@csrf
 								<input type="hidden" name="product_id" value="{{ $product->id }}" />
@@ -104,6 +105,55 @@
 		</div>
 	</div>
 </div>
+@forelse($products as $key => $product)
+<div class="modal fade" id="prod{{$product->id}}" tabindex="-1" aria-labelledby="pdctModalLabel{{$product->id}}" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered m-0">
+		<div class="modal-content modal-content rounded-0 border-0 vh-100">
+			<div class="modal-header">
+				<h6 class="modal-title fw-bold" id="addressModalLabel">Product Details</h6>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="text-dark col-12 px-0 position-relative">
+					<div class="list_item_gird m-0 bg-white listing-item">
+						<span class="badge bg-success m-3 position-absolute">25% OFF</span>
+						<div class="list-item-img text-center">
+							<img src="{{ public_path().'/storage/products/'.$product->image }}" class="img-fluid p-3">
+						</div>
+						<div class="tic-div px-3 pb-3">
+							<p class="mb-1 text-black">{{ $product->name }}</p>
+							<h6 class="card-title mt-2 mb-3 text-success fw-bold">₹{{ $product->price }} <small class="text-decoration-line-through text-muted small fw-light">₹{{ number_format($product->price + (($product->price*25)/100), 2) }}</small></h6>
+							<p class="mb-1 text-black">{{ $product->description }}</p>
+						</div>
+					</div>
+					<form method="post" action="{{ route('cart.add') }}">
+						@csrf
+						<input type="hidden" name="product_id" value="{{ $product->id }}" />
+						<input type="hidden" name="product_name" value="{{ $product->name }}" />
+						<input type="hidden" name="product_price" value="{{ $product->price }}" />
+						<input type="hidden" name="product_image" value="{{ $product->image }}" />
+						<div class="d-flex align-items-center justify-content-between gap-1">
+							<div class="quantity-btn">
+								<div class="input-group input-group-sm border rounded overflow-hiddem">
+									<div class="btn btn-light text-success minus border-0 bg-white"><i class="bi bi-dash"></i></div>
+									<input type="text" class="form-control text-center box border-0" value="1" name="qty" placeholder="" aria-label="Example text with button addon">
+									<div class="btn btn-light text-success plus border-0 bg-white"><i class="bi bi-plus"></i></div>
+								</div>
+							</div>
+							<div class="">												
+								<div class="input-group">
+									<button type="submit" class="col btn-submit btn btn-success">Add to Cart</button>
+								</div>
+							</div>																			
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@empty
+@endforelse
 @endsection
 
 	

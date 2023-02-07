@@ -166,15 +166,20 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        $utype = Auth::user()->user_type;
-        Session::flush();
-        Auth::logout();
-        if($utype == 'admin') :
-            return redirect()->route('home')
-                        ->with('success','User logged out successfully');
+        if(Auth::user()):
+            $utype = Auth::user()->user_type;
+            Session::flush();
+            Auth::logout();
+            if($utype == 'admin') :
+                return redirect()->route('home')
+                            ->with('success','User logged out successfully');
+            else:
+                return redirect()->route('login')
+                            ->with('success','User logged out successfully');
+            endif;
         else:
             return redirect()->route('login')
-                        ->with('success','User logged out successfully');
+                            ->with('success','User logged out successfully');
         endif;
     }
 

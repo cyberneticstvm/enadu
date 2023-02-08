@@ -150,6 +150,7 @@
 					@if($product && $product->youtube_video_id)
 					<div class="row mt-5">
 						<div class="col">
+							<h5>How to set GEEBIN</h5>
 							<iframe width="420" height="315" style="border: 5px solid green"
 								src="https://www.youtube.com/embed/{{$product->youtube_video_id}}">
 							</iframe>

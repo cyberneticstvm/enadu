@@ -22,9 +22,6 @@
 
         <h5>R&D Office</h5>
         <p>Startups Valley TBI, Amal Jyothi College of Engineering, Koovappally P.O, Kanjirappally, Kerala - 686 518</p>
-
-        <h5>How to set GEEBIN</h5>
-        <a href="https://youtu.be/564uEddpdzY" target="_blank">Youtube Video</a>
     </div>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">

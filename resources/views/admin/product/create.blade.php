@@ -99,6 +99,12 @@
                                         <small class="text-danger">{{ $errors->first('status') }}</small>
                                         @enderror
                                     </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="">Youtube Video ID</label>
+                                            <input type="text" class="form-control" name="youtube_video_id" value="{{ old('youtube_video_id') }}" placeholder="Youtube Video ID">
+                                        </div>
+                                    </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="req">Product Image</label>

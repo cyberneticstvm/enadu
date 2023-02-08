@@ -108,7 +108,7 @@
 @forelse($products as $key => $product)
 <div class="modal fade" id="prod{{$product->id}}" tabindex="-1" aria-labelledby="pdctModalLabel{{$product->id}}" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered m-0">
-		<div class="modal-content modal-content rounded-0 border-0 vh-100">
+		<div class="modal-content modal-content rounded-0 border-0">
 			<div class="modal-header">
 				<h6 class="modal-title fw-bold" id="addressModalLabel">Product Details</h6>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -147,7 +147,16 @@
 							</div>																			
 						</div>
 					</form>
-				</div>
+					@if($product && $product->youtube_video_id)
+					<div class="row mt-5">
+						<div class="col">
+							<iframe width="420" height="315" style="border: 5px solid green"
+								src="https://www.youtube.com/embed/{{$product->youtube_video_id}}">
+							</iframe>
+						</div>
+					</div>
+					@endif
+				</div>				
 			</div>
 		</div>
 	</div>

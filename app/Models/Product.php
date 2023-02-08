@@ -17,6 +17,7 @@ class Product extends Model
         'available_for_service',
         'image',
         'status',
+        'youtube_video_id',
     ];
 
     public function category(){

@@ -43,6 +43,7 @@ Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 
 Route::group(['middleware' => ['web', 'auth', 'user']], function(){
     Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+    Route::get('/about', [UserController::class, 'about'])->name('about');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::put('/profile/{id}', [UserController::class, 'profileupdate'])->name('profile.update');
     Route::get('/account', [AuthController::class, 'account'])->name('account');

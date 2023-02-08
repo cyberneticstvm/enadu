@@ -51,6 +51,9 @@
 			<a href="/address"><i class="bi bi-file-break me-2"></i>My Addresses</a>
 		</li>
 		<li>
+			<a href="/about"><i class="bi bi-back me-2"></i>About Us</a>
+		</li>
+		<li>
 			<a href="/contact"><i class="bi bi-envelope me-2"></i>Contact Us</a>
 		</li>
 		@if(Auth::user())

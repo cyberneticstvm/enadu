@@ -154,7 +154,7 @@ class AuthController extends Controller
         if(Auth::user()->user_type == 'user'):
             $addr = Address::where('user', Auth::user()->id)->get();
             if($addr->isEmpty()):
-                return redirect()->route('address')->with('success','User logged in successfully');                
+                return redirect()->route('account')->with('success','User logged in successfully');                
             else:
                 return redirect()->route('account')->with('success','User logged in successfully');
             endif;

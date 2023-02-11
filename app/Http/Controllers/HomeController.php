@@ -14,7 +14,7 @@ class HomeController extends Controller
         if(Auth::user()):
             //return redirect()->route('account');
             if(Auth::user()->user_type == 'user'):
-                return view('account', compact('products'));
+                return view('home', compact('products'));
             endif;
             if(Auth::user()->user_type == 'admin'):
                 return view('admin.dash');

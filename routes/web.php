@@ -22,7 +22,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/geebinapp', [HomeController::class, 'geebinapp'])->name('geebinapp');
-Route::get('/home', [HomeController::class, 'geebinapp'])->name('geebinapp');
+Route::get('/home', [HomeController::class, 'products'])->name('products');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart', [CartController::class, 'addtocart'])->name('cart.add');
 Route::get('/cart/update', [CartController::class, 'updatecart'])->name('cart.update');

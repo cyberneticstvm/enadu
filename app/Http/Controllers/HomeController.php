@@ -28,6 +28,7 @@ class HomeController extends Controller
     }
 
     public function products(){
-        return view('home');
+        $products = Product::where('status', 1)->get();
+        return view('home', compact('products'));
     }
 }

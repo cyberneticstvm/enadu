@@ -4,7 +4,7 @@
 	<div class="font-weight-normal mb-0 d-flex align-items-center">
 		<h6 class="fw-normal mb-0 text-dark d-flex align-items-center">
 			<a class="text-dark me-3 fs-4" href="/staff/dash"><i class="bi bi-chevron-left"></i></a>
-			Home
+			Orders
 		</h6>
 		<div class="ms-auto d-flex align-items-center">
 			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
@@ -23,16 +23,20 @@
 @endif
 <div class="p-3">
     <div class="row">
-		<div class="row">
-			<div class="col text-center p-3">
-				<a href="/staff/orders"><img src="{{ public_path().'/img/truck.png' }}" class="img-fluid" /></a><br>
-				<span class="text-success fw-bold">ORDERS</span>
-			</div>
-			<div class="col text-center p-3">
-				<a href="/staff/meetings"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
-				<span class="text-success fw-bold">MEETINGS</span>
-			</div>			
-		</div>
+        @forelse($orders as $key => $order)
+            <div class="col-md-3 p-3">
+                Order ID: {{ $order->oid }}<br>
+                Order Total: ₹{{ $order->amount }}<br>
+                Payment Mode: {{ $order->payment_type }}<br>
+                <u>Address:</u> <br>{{ $order->contact_name }}<br>
+                {{ $order->mobile }}<br>
+                {{ $order->address }}<br>
+                {{ $order->landmark }}<br>
+                {{ $order->pincode }}<br>
+                <a href="/staff/delivery/update/{{$order->oid}}">Update</a></small>
+            </div>
+        @empty
+        @endforelse
     </div>
 </div>
 <!-- <div class="fixed-bottom shadow-sm osahan-footer p-3">

@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\StaffOrder;
 use App\Models\Feedback;
 use App\Models\MileStone;
+use App\Models\Meeting;
+use Carbon\Carbon;
 use DB;
 
 class AdminController extends Controller
@@ -17,8 +19,52 @@ class AdminController extends Controller
     }    
 
     public function staffdash(){
-        $orders = StaffOrder::leftJoin('orders as o', 'o.id', '=', 'staff_orders.order_id')->leftJoin('addresses as a', 'a.user', '=', 'o.user')->where('user_id', Auth::user()->id)->whereIn('o.order_status', [1,2,3])->selectRaw("o.id as oid, o.amount, o.payment_type, a.*")->get();
-        return view('staff.dash', compact('orders'));
+        return view('staff.dash');
+    }
+
+    public function stafforders(){
+        $orders = StaffOrder::leftJoin('orders as o', 'o.id', '=', 'staff_orders.order_id')->leftJoin('addresses as a', 'a.user', '=', 'o.user')->where('user_id', Auth::user()->id)->whereIn('o.order_status', [1,2,3,4])->selectRaw("o.id as oid, o.amount, o.payment_type, a.*")->groupBy('o.id')->get();
+        return view('staff.orders', compact('orders'));
+    }
+
+    public function staffmeetings(){
+        $meetings = Meeting::whereDate('created_at', Carbon::today())->get();
+        return view('staff.meetings', compact('meetings'));
+    }
+
+    public function savestaffmeetings(Request $request){
+        $this->validate($request, [
+            'customer_name' => 'required',
+            'mobile' => 'required',
+            'customer_address' => 'required',
+            'location' => 'required',
+        ]);
+        $input = $request->all();
+        $input['created_by'] = $request->user()->id;
+        $last_location = Meeting::whereDate('created_at', Carbon::today())->whereNotNull('location')->orderByDesc('id')->first();
+        if($last_location):
+            $input['distance'] = $this->GetDistance($last_location->latitude, $last_location->longitude, $request->latitude, $request->longitude)['distance'];
+        else:
+            $input['distance'] = 0;
+        endif;
+        Meeting::create($input);
+        return redirect()->route('staff.meetings')->with('success','Customer updated successfully');
+    }
+
+    public function GetDistance($lat1, $lng1, $lat2, $lng2){
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=".$lat1.",".$lng1."&destinations=".$lat2.",".$lng2."&mode=driving&key=".config('app.google_api_key');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response_a = json_decode($response, true);
+        $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+        $time = $response_a['rows'][0]['elements'][0]['duration']['text'];
+        return array('distance' => $dist/1000, 'time' => $time);
     }
 
     public function delivery($id){

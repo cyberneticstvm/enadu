@@ -96,8 +96,11 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){
     Route::get('/staff/dash', [AdminController::class, 'staffdash'])->name('staff.dash');
+    Route::get('/staff/orders', [AdminController::class, 'stafforders'])->name('staff.orders');
     Route::get('/staff/delivery/update/{id}', [AdminController::class, 'delivery'])->name('staff.delivery');
     Route::post('/staff/delivery/update', [AdminController::class, 'updatedelivery'])->name('staff.delivery.update');
+    Route::get('/staff/meetings', [AdminController::class, 'staffmeetings'])->name('staff.meetings');
+    Route::post('/staff/meetings', [AdminController::class, 'savestaffmeetings'])->name('staff.meetings.save');
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

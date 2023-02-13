@@ -44,34 +44,17 @@
 				</div>
 			</a>
 		</li>
+		<li>
+			<a href="/staff/orders"><i class="bi bi-code-square me-2"></i>Orders</a>
+		</li>
         <li>
-			<a href="/meetings"><i class="bi bi-code-square me-2"></i>Meetings</a>
+			<a href="/staff/meetings"><i class="bi bi-code-square me-2"></i>Meetings</a>
 		</li>
 		@if(Auth::user())
 		<li>
 			<a href="/logout"><i class="bi bi-power me-2"></i> Logout</a>
 		</li>
 		@endif
-	</ul>
-	<ul class="bottom-nav">
-		<li class="email">
-			<a class="text-success nav-item text-center" href="/" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-ui-home text-success"></i></p>
-				Home
-			</a>
-		</li>
-		<li class="github">
-			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-sale-discount"></i></p>
-				Offer
-			</a>
-		</li>
-		<li class="ko-fi">
-			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-support-faq"></i></p>
-				Help
-			</a>
-		</li>
 	</ul>
 </nav>
 <script src="{{ public_path().'/vendor/jquery/jquery.min.js' }}" type="2b1840b241899e59fb500706-text/javascript"></script>
@@ -88,6 +71,7 @@
 	<script type="2b1840b241899e59fb500706-text/javascript" src="{{ public_path().'/js/script.js' }}"></script>
 
 	<script>
+		pickmylocation();
 		var options = {
 		componentRestrictions: {country: "in"}
 		};
@@ -100,6 +84,30 @@
 				$('#latitude').val(place.geometry['location'].lat());
 				$('#longitude').val(place.geometry['location'].lng());
 			});
+		}
+		function pickmylocation(){
+			navigator.geolocation.getCurrentPosition(
+				function (position) {
+					var addr = getUserAddressBy(position.coords.latitude, position.coords.longitude);
+				},
+				function errorCallback(error) {
+				console.log(error)
+				}
+			);
+		}
+		function getUserAddressBy(lat, long) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					var address = JSON.parse(this.responseText)
+					var addr = address.results[0].formatted_address;
+					document.getElementById('address').value = addr;
+					document.getElementById('latitude').value = lat;
+					document.getElementById('longitude').value = long;
+				}
+			};
+			xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key={{config('app.google_api_key')}}", true);
+			xhttp.send();
 		}
 	</script>
 </body>

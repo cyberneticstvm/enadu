@@ -9,13 +9,18 @@ use App\Models\StaffOrder;
 use App\Models\Feedback;
 use App\Models\MileStone;
 use App\Models\Meeting;
+use App\Models\Service;
 use Carbon\Carbon;
 use DB;
 
 class AdminController extends Controller
 {
     public function dash(){
-        return view('admin.dash');
+        $tot_orders = Order::whereDate('created_at', Carbon::today())->get()->count('id');
+        $pending_orders = Order::whereDate('created_at', Carbon::today())->where('order_status', 1)->get()->count('id');
+        $delivered_orders = Order::whereDate('created_at', Carbon::today())->where('order_status', 5)->get()->count('id');
+        $services = Service::whereDate('created_at', Carbon::today())->get()->count('id');
+        return view('admin.dash', compact('tot_orders', 'pending_orders', 'delivered_orders', 'services'));
     }    
 
     public function staffdash(){
@@ -129,5 +134,15 @@ class AdminController extends Controller
         $input['user_id'] = Auth::user()->id;
         Feedback::create($input);
         return redirect()->route('admin.feedback')->with('success','Reply submitted successfully');
+    }
+
+    public function services(){
+        $services = Service::orderByDesc('id')->get();
+        return view('admin.services', compact('services'));
+    }
+
+    public function meetings(){
+        $meetings = Meeting::orderByDesc('id')->get();
+        return view('admin.meeting', compact('meetings'));
     }
 }

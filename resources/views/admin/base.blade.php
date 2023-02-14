@@ -48,11 +48,6 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ public_path().'/admin/dist/img/AdminLTELogo.png' }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">{{ Auth::user()->user_type }}</span>
-    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -62,7 +57,7 @@
           <img src="{{ public_path().'/admin/dist/img/user2-160x160.jpg' }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="/admin/dash" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -80,6 +75,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/dash" class="nav-link">
+                  <i class="fa fa-desktop nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="/admin/order" class="nav-link">
                   <i class="fa fa-truck nav-icon"></i>
@@ -108,6 +109,18 @@
                 <a href="/admin/feedback" class="nav-link">
                   <i class="far fa-comment nav-icon"></i>
                   <p>Feedback Management</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/service" class="nav-link">
+                  <i class="far fa-file nav-icon"></i>
+                  <p>Service Requests</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/meeting" class="nav-link">
+                  <i class="far fa-user-circle nav-icon"></i>
+                  <p>Meetings</p>
                 </a>
               </li>               
             </ul>

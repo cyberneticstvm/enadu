@@ -24,4 +24,12 @@ class Service extends Model
     public function product(){
         return $this->belongsTo(Product::class, 'product');
     }
+
+    public function address(){
+        return $this->belongsTo(Address::class, 'address');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

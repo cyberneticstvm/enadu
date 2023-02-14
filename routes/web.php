@@ -92,6 +92,9 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::post('/admin/feedback', [AdminController::class, 'savefeedback'])->name('admin.feedback.save');
     Route::get('/admin/comment/reply/{id}', [AdminController::class, 'showcomment'])->name('admin.comment');
     Route::post('/admin/comment/reply', [AdminController::class, 'replycomment'])->name('admin.comment.reply');
+
+    Route::get('/admin/service', [AdminController::class, 'services'])->name('admin.services');
+    Route::get('/admin/meeting', [AdminController::class, 'meetings'])->name('admin.meetings');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){

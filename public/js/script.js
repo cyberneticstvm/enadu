@@ -51,7 +51,7 @@ $(function(){
         
     });
 
-    $(".addrServ").click(function(){ alert('asdf')
+    $(".addrServ").click(function(){
         $("#addrcat").val('service');
     });
     

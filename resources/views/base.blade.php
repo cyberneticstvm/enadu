@@ -19,16 +19,6 @@
 	<link href="{{ public_path().'/vendor/sidebar/demo.css' }}" rel="stylesheet">
 </head>
 <body class="mb-5 pb-5">
-<!--<div class="p-3 shadow-sm bg-warning danger-nav osahan-home-header sticky-top">
-	<div class="font-weight-normal mb-0 d-flex align-items-center">
-		<h4 class="m-0 fw-bold text-black">E<span class="text-success">nadu</span></h4>
-		<div class="ms-auto d-flex align-items-center">
-			<a href="/login" class="me-3 text-dark fs-5"><i class="bi bi-person-circle"></i></a>
-			<a href="/cart" class="me-3 text-dark fs-5"><i class="bi bi-basket"></i></a>
-			<a class="toggle osahan-toggle fs-4 text-dark ms-auto" href="#"><i class="bi bi-list"></i></a>
-		</div>
-	</div>
-</div>-->
 
 @yield('content')
 
@@ -61,26 +51,6 @@
 			<a href="/logout"><i class="bi bi-power me-2"></i> Logout</a>
 		</li>
 		@endif
-	</ul>
-	<ul class="bottom-nav">
-		<li class="email">
-			<a class="text-success nav-item text-center" href="/" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-ui-home text-success"></i></p>
-				Home
-			</a>
-		</li>
-		<li class="github">
-			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-sale-discount"></i></p>
-				Offer
-			</a>
-		</li>
-		<li class="ko-fi">
-			<a href="/" class="nav-item text-center" tabindex="0" role="menuitem">
-				<p class="h5 m-0"><i class="icofont-support-faq"></i></p>
-				Help
-			</a>
-		</li>
 	</ul>
 </nav>
 <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
@@ -188,5 +158,11 @@
 			});
 		}
 	</script>
+	<script type="text/javascript">
+	function googleTranslateElementInit() {
+	new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+	}
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

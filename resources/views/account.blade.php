@@ -13,6 +13,11 @@
 </div>
 <div class="p-3">
 	<div class="row">
+		<div class="col text-end" id="google_translate_element"></div>
+	</div>
+</div>
+<div class="p-3">
+	<div class="row">
 		<div class="col text-center p-3">
 			<a href="/home"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
 			<span class="text-success fw-bold">PRODUCTS</span>

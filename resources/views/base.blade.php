@@ -19,7 +19,11 @@
 	<link href="{{ public_path().'/vendor/sidebar/demo.css' }}" rel="stylesheet">
 </head>
 <body class="mb-5 pb-5">
-
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="spinner"></div>
+	</div>
+    <!-- Preloader end-->
 @yield('content')
 
 <nav id="main-nav">

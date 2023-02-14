@@ -89,7 +89,9 @@ $(function(){
         var selected = $(':selected', this);
         var ltype = selected.closest('optgroup').attr('id');
         $("#localbody_type").val(ltype);
-    })
+    });
+
+    $("#preloader").css('display', 'none');
 });
 
 setTimeout(function () {

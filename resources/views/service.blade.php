@@ -62,7 +62,7 @@
                 <select class="form-control" name="ptype_address">
                     <option value="">Select</option>
                     @forelse($franchises as $key => $fr)
-                    <option value="{{ $fr->name }}">{{ $fr->name }}</option>
+                    <option value="{{ $fr->name }}">{{ $fr->name }}, {{ $fr->address }}</option>
                     @empty
                     @endforelse
                 </select>

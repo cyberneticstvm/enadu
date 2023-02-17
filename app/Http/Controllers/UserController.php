@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Feedback;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Franchise;
 use Hash;
 use DB;
 use Session;
@@ -168,7 +169,8 @@ class UserController extends Controller
         $addresses = Address::where('user', Auth::user()->id)->get();
         $products = Product::where('available_for_service', 'Y')->get();
         $districts = DB::table('districts')->orderBy('name')->get();
-        return view('service', compact('addresses', 'products', 'districts'));
+        $franchises = Franchise::orderBy('name')->get();
+        return view('service', compact('addresses', 'products', 'districts', 'franchises'));
     }
 
     public function saveservice(Request $request){

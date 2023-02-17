@@ -59,7 +59,13 @@
             <label class="form-label text-muted small mb-1">Franchise Name if Direct Purchase</label>
             <div class="input-group input-group-lg bg-white shadow-sm rounded overflow-hiddem">
                 <span class="input-group-text bg-white"><i class="bi bi-geo-alt text-muted"></i></span>
-                <input type="text" class="form-control" name="ptype_address" placeholder="Franchise Name">
+                <select class="form-control" name="ptype_address">
+                    <option value="">Select</option>
+                    @forelse($franchises as $key => $fr)
+                    <option value="{{ $fr->name }}">{{ $fr->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
             </div>
         </div>
         <div class="localbody d-none">

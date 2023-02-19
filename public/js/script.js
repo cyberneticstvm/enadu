@@ -92,6 +92,24 @@ $(function(){
     });
 
     $("#preloader").css('display', 'none');
+
+    $(".atChk").click(function(){
+        var val = 0;
+        if($(this).is(":checked")){
+            val = 1;
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/staff/attendance/update',
+            data: {'val': val},
+            success: function(response){
+                alert(response);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log(XMLHttpRequest);
+            }
+        });
+    })
 });
 
 setTimeout(function () {

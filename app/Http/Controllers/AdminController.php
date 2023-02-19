@@ -10,6 +10,7 @@ use App\Models\Feedback;
 use App\Models\MileStone;
 use App\Models\Meeting;
 use App\Models\Service;
+use App\Models\Attendance;
 use Carbon\Carbon;
 use DB;
 
@@ -144,5 +145,23 @@ class AdminController extends Controller
     public function meetings(){
         $meetings = Meeting::orderByDesc('id')->get();
         return view('admin.meeting', compact('meetings'));
+    }
+
+    public function attendance(){
+        $stime = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->select('signin_time')->first();
+        return view('staff.attendance', compact('stime'));
+    }
+
+    public function attendanceupdate(Request $request){
+        $input['user'] = $request->user()->id;        
+        if($request->val == 1):
+            $input['date'] = Carbon::today();
+            $input['signin_time'] = Carbon::now();
+            Attendance::upsert($input, ['user', 'date']);
+        else:
+            $at = Attendance::whereDate('date', Carbon::today())->where('user', $request->user()->id)->first();
+            $at->where('date', Carbon::today())->where('user', $request->user()->id)->update(['signout_time' => Carbon::now()]);
+        endif;
+        echo "Attendance updated successfully!";
     }
 }

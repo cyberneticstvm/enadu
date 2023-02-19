@@ -24,18 +24,13 @@
 <div class="p-3">
     <div class="row">
 		<div class="row">
+            <h5>Attendance ({{ date('d/M/Y') }})</h5>
 			<div class="col text-center p-3">
-				<a href="/staff/orders"><img src="{{ public_path().'/img/truck.png' }}" class="img-fluid" /></a><br>
-				<span class="text-success fw-bold">ORDERS</span>
-			</div>
-			<div class="col text-center p-3">
-				<a href="/staff/meetings"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
-				<span class="text-success fw-bold">MEETINGS</span>
-			</div>
-			<div class="col text-center p-3">
-				<a href="/staff/attendance"><img src="{{ public_path().'/img/prod.png' }}" class="img-fluid" /></a><br>
-				<span class="text-success fw-bold">ATTENDANCE</span>
-			</div>			
+                <label class="switch">
+                    <input type="checkbox" class="atChk" {{ ($stime) ? 'checked' : '' }}>
+                    <span class="slider"></span>
+                </label>
+			</div>						
 		</div>
     </div>
 </div>

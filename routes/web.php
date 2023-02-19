@@ -104,6 +104,8 @@ Route::group(['middleware' => ['web', 'auth', 'staff']], function(){
     Route::post('/staff/delivery/update', [AdminController::class, 'updatedelivery'])->name('staff.delivery.update');
     Route::get('/staff/meetings', [AdminController::class, 'staffmeetings'])->name('staff.meetings');
     Route::post('/staff/meetings', [AdminController::class, 'savestaffmeetings'])->name('staff.meetings.save');
+    Route::get('/staff/attendance', [AdminController::class, 'attendance'])->name('staff.attendance');
+    Route::get('/staff/attendance/update', [AdminController::class, 'attendanceupdate'])->name('staff.attendance.update');
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

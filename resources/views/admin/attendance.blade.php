@@ -35,9 +35,9 @@
                             <td>{{ $slno++ }}</td>
                             <td>{{ $at->user()->find($at->user)->name }}</td>
                             <td>{{ $at->location }}</td>
-                            <td>{{ $at->date }}</td>
-                            <td>{{ $at->signin_time }}</td>
-                            <td>{{ $at->signout_time }}</td>
+                            <td>{{ date('d/M/Y', strtotime($at->date)) }}</td>
+                            <td>{{ date('h:i a', strtotime($at->signin_time)) }}</td>
+                            <td>{{ date('h:i a', strtotime($at->signout_time)) }}</td>
                         </tr>
                     @empty
                     @endforelse

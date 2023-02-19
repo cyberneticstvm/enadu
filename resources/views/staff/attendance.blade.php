@@ -29,6 +29,9 @@
                 <label class="switch">
                     <input type="checkbox" class="atChk" {{ ($stime) ? 'checked' : '' }}>
                     <span class="slider"></span>
+                    <input type="hidden" id="address" class="at_location" />
+                    <input type="hidden" id="latitude" class="at_lat" />
+                    <input type="hidden" id="longitude" class="at_lng" />
                 </label>
 			</div>						
 		</div>

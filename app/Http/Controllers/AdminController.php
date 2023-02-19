@@ -153,7 +153,10 @@ class AdminController extends Controller
     }
 
     public function attendanceupdate(Request $request){
-        $input['user'] = $request->user()->id;        
+        $input['user'] = $request->user()->id;
+        $input['location'] = $request->addr;   
+        $input['latitude'] = $request->lat;   
+        $input['longitude'] = $request->lng;   
         if($request->val == 1):
             $input['date'] = Carbon::today();
             $input['signin_time'] = Carbon::now();
@@ -163,5 +166,10 @@ class AdminController extends Controller
             $at->where('date', Carbon::today())->where('user', $request->user()->id)->update(['signout_time' => Carbon::now()]);
         endif;
         echo "Attendance updated successfully!";
+    }
+
+    public function fetchattendance(){
+        $attendances = Attendance::orderByDesc('date')->get();
+        return view('admin.attendance', compact('attendances'));
     }
 }

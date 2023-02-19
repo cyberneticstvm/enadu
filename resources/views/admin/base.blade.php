@@ -122,6 +122,12 @@
                   <i class="far fa-user-circle nav-icon"></i>
                   <p>Meetings</p>
                 </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/attendance" class="nav-link">
+                  <i class="far fa-user-circle nav-icon"></i>
+                  <p>Attendance</p>
+                </a>
               </li>               
             </ul>
           </li>

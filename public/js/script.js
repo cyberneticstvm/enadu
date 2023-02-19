@@ -95,13 +95,17 @@ $(function(){
 
     $(".atChk").click(function(){
         var val = 0;
+        var addr = $(".at_location").val();
+        var lat = $(".at_lat").val();
+        var lng = $(".at_lng").val();
+        alert(lat);
         if($(this).is(":checked")){
             val = 1;
         }
         $.ajax({
             type: 'GET',
             url: '/staff/attendance/update',
-            data: {'val': val},
+            data: {'val': val, 'addr': addr, 'lat': lat, 'lng': lng},
             success: function(response){
                 alert(response);
             },

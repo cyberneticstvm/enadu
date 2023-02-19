@@ -95,6 +95,7 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
 
     Route::get('/admin/service', [AdminController::class, 'services'])->name('admin.services');
     Route::get('/admin/meeting', [AdminController::class, 'meetings'])->name('admin.meetings');
+    Route::get('/admin/attendance', [AdminController::class, 'fetchattendance'])->name('admin.fetchattendance');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){

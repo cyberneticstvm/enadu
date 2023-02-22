@@ -98,7 +98,6 @@ $(function(){
         var addr = $(".at_location").val();
         var lat = $(".at_lat").val();
         var lng = $(".at_lng").val();
-        alert(lat);
         if($(this).is(":checked")){
             val = 1;
         }

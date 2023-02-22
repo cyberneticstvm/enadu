@@ -20,7 +20,6 @@ return new class extends Migration
             $table->dateTime('signin_time')->nullable();
             $table->dateTime('signout_time')->nullable();
             $table->timestamps();
-            $table->unique(['user', 'date']);
         });
     }
 

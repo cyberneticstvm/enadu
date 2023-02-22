@@ -148,22 +148,23 @@ class AdminController extends Controller
     }
 
     public function attendance(){
-        $stime = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->select('signin_time')->orderByDesc('id')->first();
-        return view('staff.attendance', compact('stime'));
+        $stime = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->whereNull('signout_time')->select('signin_time')->orderByDesc('id')->first();
+        $ats = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->orderByDesc('id')->get();
+        return view('staff.attendance', compact('stime', 'ats'));
     }
 
     public function attendanceupdate(Request $request){
-        $input['user'] = $request->user()->id;
-        $input['location'] = $request->addr;   
-        $input['latitude'] = $request->lat;   
-        $input['longitude'] = $request->lng;   
+        $input['user'] = $request->user()->id;           
         if($request->val == 1):
+            $input['location_in'] = $request->addr;   
+            $input['latitude_in'] = $request->lat;   
+            $input['longitude_in'] = $request->lng;
             $input['date'] = Carbon::today();
             $input['signin_time'] = Carbon::now();
-            Attendance::upsert($input, ['user', 'date']);
+            Attendance::create($input);
         else:
-            $at = Attendance::whereDate('date', Carbon::today())->where('user', $request->user()->id)->first();
-            $at->where('date', Carbon::today())->where('user', $request->user()->id)->update(['signout_time' => Carbon::now()]);
+            $at = Attendance::whereDate('date', Carbon::today())->where('user', $request->user()->id)->whereNull('signout_time')->orderByDesc('id')->first();
+            $at->update(['signout_time' => Carbon::now(), 'location_out' => $request->addr, 'latitude_out' => $request->lat, 'longitude_out' => $request->lng]);
         endif;
         echo "Attendance updated successfully!";
     }

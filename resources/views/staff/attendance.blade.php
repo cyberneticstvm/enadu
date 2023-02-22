@@ -27,7 +27,7 @@
             <h5>Attendance ({{ date('d/M/Y') }})</h5>
 			<div class="col text-center p-3">
                 <label class="switch">
-                    <input type="checkbox" class="atChk" {{ ($stime) ? 'checked' : '' }}>
+                    <input type="checkbox" class="atChk" {{ ($stime && $stime->signin_time) ? 'checked' : '' }}>
                     <span class="slider"></span>
                     <input type="hidden" id="address" class="at_location" />
                     <input type="hidden" id="latitude" class="at_lat" />
@@ -36,6 +36,24 @@
 			</div>						
 		</div>
     </div>
+</div>
+<div class="card-body table-responsive">
+	<table id="dataTbl" class="table table-sm table-bordered table-striped">
+		<thead><tr><th>SL No</th><th>Date</th><th>In Time</th><th>In Location</th><th>Out Time</th><th>Out Location</th></tr></thead>
+		<tbody> @php $slno = 1; @endphp
+		@forelse($ats as $key => $at)
+			<tr>
+				<td>{{ $slno++ }}</td>
+				<td>{{ date('d/M/Y', strtotime($at->date)) }}</td>
+				<td>{{ date('h:i a', strtotime($at->signin_time)) }}</td>
+				<td>{{ $at->location_in }}</td>
+				<td>{{ ($at->signout_time) ? date('h:i a', strtotime($at->signout_time)) : '' }}</td>
+				<td>{{ $at->location_out }}</td>		
+			</tr>
+		@empty
+		@endforelse
+		</tbody>
+	</table>
 </div>
 <!-- <div class="fixed-bottom shadow-sm osahan-footer p-3">
 	<div class="row m-0 footer-menu overflow-hiddem bg-black rounded shadow links">

@@ -104,8 +104,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return redirect()->route('profile')
-                        ->with('success','Profile Updated successfully');
+        return view('admin.user.edit', compact('user'));
     }
 
     /**

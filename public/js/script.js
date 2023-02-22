@@ -107,7 +107,8 @@ $(function(){
             url: '/staff/attendance/update',
             data: {'val': val, 'addr': addr, 'lat': lat, 'lng': lng},
             success: function(response){
-                alert(response);
+                //alert(response);
+                window.location.reload();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 console.log(XMLHttpRequest);

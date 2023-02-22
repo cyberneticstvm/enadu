@@ -41,26 +41,6 @@ Route::post('/changepwd', [AuthController::class, 'changepwd'])->name('changepwd
 
 Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 
-Route::group(['middleware' => ['web', 'auth', 'user']], function(){
-    Route::get('/contact', [UserController::class, 'contact'])->name('contact');
-    Route::get('/about', [UserController::class, 'about'])->name('about');
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    Route::put('/profile/{id}', [UserController::class, 'profileupdate'])->name('profile.update');
-    Route::get('/account', [AuthController::class, 'account'])->name('account');
-    Route::get('/address', [AddressController::class, 'index'])->name('address');
-    Route::post('/address', [AddressController::class, 'store'])->name('address.save');
-    Route::delete('/address/{id}', [AddressController::class, 'destroy'])->name('address.delete');
-    Route::get('/orders', [UserController::class, 'order'])->name('order');
-    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
-    Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
-    Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
-    Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');    
-    Route::get('/milestone/{id}', [UserController::class, 'show'])->name('milestone');    
-    Route::get('/service', [UserController::class, 'service'])->name('service');
-    Route::post('/service', [UserController::class, 'saveservice'])->name('service.save');
-    Route::get('/localbody/{district}', [UserController::class, 'localbody'])->name('localbody');
-});
-
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/dash', [AdminController::class, 'dash'])->name('admin.dash');
     Route::get('/admin/order', [AdminController::class, 'order'])->name('admin.order');
@@ -97,6 +77,27 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/meeting', [AdminController::class, 'meetings'])->name('admin.meetings');
     Route::get('/admin/attendance', [AdminController::class, 'fetchattendance'])->name('admin.fetchattendance');
 });
+
+Route::group(['middleware' => ['web', 'auth', 'user']], function(){
+    Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+    Route::get('/about', [UserController::class, 'about'])->name('about');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/{id}', [UserController::class, 'profileupdate'])->name('profile.update');
+    Route::get('/account', [AuthController::class, 'account'])->name('account');
+    Route::get('/address', [AddressController::class, 'index'])->name('address');
+    Route::post('/address', [AddressController::class, 'store'])->name('address.save');
+    Route::delete('/address/{id}', [AddressController::class, 'destroy'])->name('address.delete');
+    Route::get('/orders', [UserController::class, 'order'])->name('order');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::get('/thankyou', [CartController::class, 'thankyou'])->name('thankyou');
+    Route::get('/feedback', [UserController::class, 'feedback'])->name('feedback');
+    Route::post('/feedback', [UserController::class, 'savefeedback'])->name('feedback.save');    
+    Route::get('/milestone/{id}', [UserController::class, 'show'])->name('milestone');    
+    Route::get('/service', [UserController::class, 'service'])->name('service');
+    Route::post('/service', [UserController::class, 'saveservice'])->name('service.save');
+    Route::get('/localbody/{district}', [UserController::class, 'localbody'])->name('localbody');
+});
+
 
 Route::group(['middleware' => ['web', 'auth', 'staff']], function(){
     Route::get('/staff/dash', [AdminController::class, 'staffdash'])->name('staff.dash');

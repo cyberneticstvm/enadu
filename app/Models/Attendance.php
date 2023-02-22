@@ -14,9 +14,12 @@ class Attendance extends Model
         'user',
         'signin_time',
         'signout_time',
-        'location',
-        'latitude',
-        'longitude',
+        'location_in',
+        'latitude_in',
+        'longitude_in',
+        'location_out',
+        'latitude_out',
+        'longitude_out',
     ];
 
     public function user(){

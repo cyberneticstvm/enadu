@@ -148,7 +148,7 @@ class AdminController extends Controller
     }
 
     public function attendance(){
-        $stime = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->select('signin_time')->first();
+        $stime = Attendance::whereDate('date', Carbon::today())->where('user', Auth::user()->id)->select('signin_time')->orderByDesc('id')->first();
         return view('staff.attendance', compact('stime'));
     }
 

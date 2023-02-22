@@ -28,12 +28,13 @@
               </div>
               <div class="card-body table-responsive">
                 <table id="dataTbl" class="table table-sm table-bordered table-striped">
-                  <thead><tr><th>SL No</th><th>Staff Name</th><th>Sign In Location</th><th>Date</th><th>In</th><th>Out</th></tr></thead>
+                  <thead><tr><th>SL No</th><th>Staff Name</th><th>In Location</th><th>Out Location</th><th>Date</th><th>In</th><th>Out</th></tr></thead>
                     <tbody> @php $slno = 1; @endphp
                     @forelse($attendances as $key => $at)
                         <tr>
                             <td>{{ $slno++ }}</td>
                             <td>{{ $at->user()->find($at->user)->name }}</td>
+                            <td>{{ $at->location }}</td>
                             <td>{{ $at->location }}</td>
                             <td>{{ date('d/M/Y', strtotime($at->date)) }}</td>
                             <td>{{ date('h:i a', strtotime($at->signin_time)) }}</td>

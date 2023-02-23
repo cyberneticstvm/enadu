@@ -94,7 +94,7 @@
                 <select class="form-control" name="address">
                     <option value="">Select</option>
                     @forelse($addresses as $key => $addr)
-                    <option value="{{ $addr->id }}">{{ $addr->address }}</option>
+                    <option value="{{ $addr->id }}">{{ $addr->contact_name.', '.$addr->mobile.', '.$addr->address }}</option>
                     @empty
                     @endforelse
                 </select>

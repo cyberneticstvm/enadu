@@ -44,6 +44,7 @@ Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/dash', [AdminController::class, 'dash'])->name('admin.dash');
     Route::get('/admin/order', [AdminController::class, 'order'])->name('admin.order');
+    Route::post('/admin/order', [AdminController::class, 'fetchorder'])->name('admin.order.fetch');
     Route::get('/admin/order-details/{id}', [AdminController::class, 'orderdetails'])->name('admin.orderdetails');
     Route::post('/admin/order/assign', [AdminController::class, 'assignorder'])->name('admin.order.assign');
 

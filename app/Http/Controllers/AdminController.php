@@ -93,8 +93,22 @@ class AdminController extends Controller
     }
 
     public function order(){
+        $status = DB::table('order_status')->get(); $inputs = [];
         $orders = Order::leftJoin('order_status as os', 'orders.order_status', '=', 'os.id')->selectRaw("orders.id, orders.amount, orders.created_at, os.name")->where('order_status', '!=', 5)->orderByDesc('created_at')->get();
-        return view('admin.order', compact('orders'));
+        return view('admin.order', compact('orders', 'status', 'inputs'));
+    }
+
+    public function fetchorder(Request $request){
+        $fdate = ($request->from_date) ? Carbon::createFromFormat('Y-m-d', $request->from_date)->startOfDay() : NULL;
+        $tdate = ($request->to_date) ? Carbon::createFromFormat('Y-m-d', $request->to_date)->endOfDay() : NULL;
+        $status = DB::table('order_status')->get();
+        $inputs = array($request->from_date, $request->to_date, $request->status);
+        $orders = Order::leftJoin('order_status as os', 'orders.order_status', '=', 'os.id')->selectRaw("orders.id, orders.amount, orders.created_at, os.name")->when($request->status > 0, function($query) use ($request) {
+            $query->where('orders.order_status', $request->status);
+        })->when($fdate, function ($query) use ($fdate, $tdate){
+            $query->whereBetween('orders.created_at', [$fdate, $tdate]);
+        })->orderByDesc('orders.created_at')->get();
+        return view('admin.order', compact('orders', 'status', 'inputs'));
     }
 
     public function orderdetails($id){

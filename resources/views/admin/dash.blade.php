@@ -1,6 +1,6 @@
 @extends('admin.base')
 @section('content')
-<div class="content">
+<div class="content-wrapper">
     <div class="container mt-3">
         <div class="row">
           <div class="col-lg-3 col-6">

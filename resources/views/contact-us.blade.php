@@ -14,14 +14,19 @@
 <div class="row p-4">
     <div class="col">
         <h5>Contact Us</h5>
-        <h5>Foab Solutions Pvt.Ltd</h5>
-        <p>Melettu Plaza, Munthirikavala, Kurisummoodu, Changanacherry 686 104</p>
+        <h5>ENADU YOUVAJANA CO-OPERATIVE SOCIETY : K – 1233</h5>
+        <p>Head Office: CHAZHIKATTU BUILDINGS</p>
+        <p>OPP: PANCHAYATH OFFICE, VELIYANNOOR POST, KOTTAYAM</p>
 
         <h5>Communications</h5>
-        <p>Call us: 0481 2953999 / +91 94973 33999 | Email: info@foabsolutions.com</p>
+        <p>Phone: 8590422087, 9447709388 | Email: enaducosociety@gmail.com</p>
 
-        <h5>R&D Office</h5>
-        <p>Startups Valley TBI, Amal Jyothi College of Engineering, Koovappally P.O, Kanjirappally, Kerala - 686 518</p>
+        <h5>Branch Office: 3/1062 E</h5>
+        <p>P S ARCADE, ELAKKATT KANDIPARAMBIL, KOZHIKKODE</p>
+		<p>Phone: 9645078117</p>
+
+		<h5>Technology Partner</h5>
+		<p>FOAB SOLUTIONS PRIVATE LIMITED</p>
     </div>
 </div>
 <div class="fixed-bottom shadow-sm osahan-footer p-3">

@@ -15,10 +15,21 @@
     <div class="col">
         <h5>About Us</h5>
         <p>
-        We have been established with the major goal of answering some of the very important challenges we face in our daily life. How to manage the biodegradable solid wastes generated in a household as well as commercial setting? The management of solid wastes is the need of the hour which requires a multi-disciplinary approach. We are a group of people, who are sensitive to environmental issues and committed to do things that can impact positive to the existence of the very life of human race.
+        ENADU YUVAJANA CO-OPERATIVE SOCIETY K 1233 has been formed in 2021 under Chief Ministers
+		100 days Mission Project. Kerala is facing too many issues in Waste management sector; Enadu is
+		aiming to make our state clean and healthy by using the force, vision and ability of youth. As the
+		first step we are concentrating in Source level waste management solutions. We tied-up with Foab
+		Solutions Pvt Ltd, a start-up company working in Start-ups Valley TBI, Amaljyothi College of
+		Engineering, Kanjirappally. Foab Solutions Pvt Ltd is the Kerala Suchitwa Mission approved
+		manufacturer of GEEBIN - a Multi-Layer Aerobic Composter Bin for managing source level household
+		bio-wastes.
         </p>
         <p>
-        The company has been registered as a startup incubator in the Startups Valley of Amal Jyothi College of Engineering, Kanjirapally. We have done extensive research on design, development and production of a home composter, or aerobic bin system for source level composting of day-today household wastes. The biodegradable household wastes are converted to excellent manure within 30 days, through the action of a consortium of carefully chosen beneficial microbes. The aerobic bin composter is named as "Geebin.”
+        ENADU is approved by Kerala Suchitwa Mission to deliver services to LSGD’s in Kerala. We are
+		approved Service Providers of GEEBIN and also authorised to distribute Biogas Plants. By delivering
+		quality products and assuring good waste management education and services to beneficiaries and
+		LSGD’s, Enadu believes we can create more job opportunities to youngsters in this field and make a
+		good impact in this sector.
         </p>
     </div>
 </div>

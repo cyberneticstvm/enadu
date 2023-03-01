@@ -9,6 +9,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FranchiseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,13 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/staff/edit/{id}', [UserController::class, 'edit'])->name('admin.staff.edit');
     Route::put('/admin/staff/edit/{id}', [UserController::class, 'update'])->name('admin.staff.update');
     Route::delete('/admin/staff/delete/{id}', [UserController::class, 'destroy'])->name('admin.staff.delete');
+
+    Route::get('/admin/franchise', [FranchiseController::class, 'index'])->name('admin.franchise');
+    Route::get('/admin/franchise/create', [FranchiseController::class, 'create'])->name('admin.franchise.create');
+    Route::post('/admin/franchise/create', [FranchiseController::class, 'store'])->name('admin.franchise.save');
+    Route::get('/admin/franchise/edit/{id}', [FranchiseController::class, 'edit'])->name('admin.franchise.edit');
+    Route::put('/admin/franchise/edit/{id}', [FranchiseController::class, 'update'])->name('admin.franchise.update');
+    Route::delete('/admin/franchise/delete/{id}', [FranchiseController::class, 'destroy'])->name('admin.franchise.delete');
 
     Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
     Route::post('/admin/feedback', [AdminController::class, 'savefeedback'])->name('admin.feedback.save');

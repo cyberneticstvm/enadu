@@ -128,7 +128,13 @@
                   <i class="far fa-user-circle nav-icon"></i>
                   <p>Attendance</p>
                 </a>
-              </li>               
+              </li>
+              <li class="nav-item">
+                <a href="/admin/franchise" class="nav-link">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Franchise Management</p>
+                </a>
+              </li>                
             </ul>
           </li>
         </ul>

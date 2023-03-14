@@ -68,6 +68,8 @@ class CartController extends Controller
             return redirect()->route('thankyou');
         else:
             $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.payment_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
+            echo $key;
+            die;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);     
             curl_setopt($ch, CURLOPT_HEADER, FALSE);

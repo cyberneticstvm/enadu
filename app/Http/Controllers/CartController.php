@@ -92,8 +92,7 @@ class CartController extends Controller
             $response = curl_exec($ch);
             curl_close($ch);
             $decode = json_decode($response);
-            //dd($decode);
-            echo $url;
+            dd($decode);
             die;
             /*$success = $decode->success;
             if($success == true):

@@ -94,13 +94,15 @@ class CartController extends Controller
             $response = curl_exec($ch);
             curl_close($ch);
             $decode = json_decode($response);
-            $success = $decode->success;
+            dd($decode);
+            die;
+            /*$success = $decode->success;
             if($success == true):
                 $paymentURL = $decode->payment_request->longurl;
                 redirect()->to($paymentURL)->send();
             else:
                 return redirect()->back()->with('error', 'Something went wrong! Status Message: '.$decode->message);
-            endif;
+            endif;*/
         endif;   
     }
 

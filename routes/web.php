@@ -22,6 +22,7 @@ use App\Http\Controllers\FranchiseController;
 |
 */
 
+/*Route::get('/geebinapp', [HomeController::class, 'geebinapp'])->name('geebinapp');*/
 Route::get('/geebinapp', [HomeController::class, 'geebinapp'])->name('geebinapp');
 Route::get('/home', [HomeController::class, 'products'])->name('products');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');

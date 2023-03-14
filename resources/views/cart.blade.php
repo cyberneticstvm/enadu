@@ -121,11 +121,11 @@
             <a href="/" data-bs-toggle="modal" data-bs-target="#addressModal" class="col btn btn-info">Add Address</a>
         </div>
         <div class="input-group p-3">
+            <!--<div class="col">
+                <input type="radio" name="ptype" value="instamojo"  /> Pay Now
+            </div>-->   
             <div class="col">
-                <input type="radio" name="ptype" value="instamojo" checked /> Pay Now
-            </div>   
-            <div class="col">
-                <input type="radio" name="ptype" value="cod" /> Cash On Delivery
+                <input type="radio" name="ptype" value="cod" checked /> Cash On Delivery
             </div>
         </div>
     </div>

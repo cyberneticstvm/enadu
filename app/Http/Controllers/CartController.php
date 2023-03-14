@@ -68,15 +68,16 @@ class CartController extends Controller
             return redirect()->route('thankyou');
         else:
             $key = Config::get('myconfig.instamojo.key'); $token = Config::get('myconfig.instamojo.token'); $url = Config::get('myconfig.instamojo.payment_url'); $redirect_url = Config::get('myconfig.instamojo.redirect_url');
-            echo $key;
-            die;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);     
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
+            //curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
             $payload = Array(
+                'grant_type' => 'client_credentials',
+                'client_id' => $key,
+                'client_secret' => $token,
                 'purpose' => $request->purpose,
                 'amount' => $request->amount,
                 'phone' => Auth::user()->addresses()->find($request->address)->mobile,

@@ -74,7 +74,7 @@ class CartController extends Controller
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
             //curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $key"));
             $payload = Array(
                 'purpose' => $request->purpose,
                 'amount' => $request->amount,

@@ -73,11 +73,8 @@ class CartController extends Controller
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            //curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$key", "X-Auth-Token:$token"));
             $payload = Array(
-                'grant_type' => 'client_credentials',
-                'client_id' => $key,
-                'client_secret' => $token,
                 'purpose' => $request->purpose,
                 'amount' => $request->amount,
                 'phone' => Auth::user()->addresses()->find($request->address)->mobile,
@@ -94,7 +91,7 @@ class CartController extends Controller
             $response = curl_exec($ch);
             curl_close($ch);
             $decode = json_decode($response);
-            dd($decode);
+            echo $decode;
             die;
             /*$success = $decode->success;
             if($success == true):

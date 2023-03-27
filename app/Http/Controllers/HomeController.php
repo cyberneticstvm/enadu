@@ -9,6 +9,10 @@ use DB;
 
 class HomeController extends Controller
 {
+    public function privacy(){
+        return view('privacy');
+    }
+
     public function geebinapp(){
         $products = Product::where('status', 1)->get();
         if(Auth::user()):

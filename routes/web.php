@@ -42,6 +42,7 @@ Route::get('/changepwd', [AuthController::class, 'changepwd1'])->name('changepwd
 Route::post('/changepwd', [AuthController::class, 'changepwd'])->name('changepwd');
 
 Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
+Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function(){
     Route::get('/admin/dash', [AdminController::class, 'dash'])->name('admin.dash');

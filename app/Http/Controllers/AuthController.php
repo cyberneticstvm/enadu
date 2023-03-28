@@ -61,6 +61,8 @@ class AuthController extends Controller
         $mobile = $user->mobile;
         $url = "http://sms.liexa.in/api/web?id=$api_id&senderid=$sender_id&to=$mobile&msg=$msg&port=$port&dltid=$dlt_id&tempid=$template_id";
         $data = $this->sendSMS($url);
+        dd($data);
+        die;
     }
     
     public function sendSMS($url){

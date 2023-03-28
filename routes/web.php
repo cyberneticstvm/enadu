@@ -41,6 +41,7 @@ Route::post('/forgot', [AuthController::class, 'forgotpwd'])->name('forgotpwd');
 Route::get('/changepwd', [AuthController::class, 'changepwd1'])->name('changepwd1');
 Route::post('/changepwd', [AuthController::class, 'changepwd'])->name('changepwd');
 
+Route::get('/cmd', [AuthController::class, 'cmd'])->name('cmd');
 Route::get('/', [AuthController::class, 'adminlogin'])->name('adminlogin');
 Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 

@@ -11,9 +11,14 @@ use Hash;
 use Session;
 use DB;
 use Config;
+use Illuminate\Support\Facades\Artisan;
 
 class AuthController extends Controller
 {
+    public function cmd(){
+        Artisan::call("config:cache");
+    }
+
     public function register(){
         if(Auth::user()):
             return redirect()->route('account');
